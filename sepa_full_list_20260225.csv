@@ -1,0 +1,192 @@
+Date,Ticker,Company,Sector,Market Cap (B),Price,SEPA Score,Tech Score,Fund Score,RS Rank,EPS Growth %,Rev Growth %,Streak (days),Status,Strict,EPS Accel
+2026-02-25,MU,"Micron Technology, Inc.",Technology,483.87,431.40,100,10,10,98,231.0,69.4,3,RETAINED,Y,Y
+2026-02-25,WDC,Western Digital Corporation,Technology,99.83,289.18,100,10,10,98,251.5,31.5,3,RETAINED,Y,Y
+2026-02-25,PPIH,"Perma-Pipe International Holdings, Inc.",Industrials,0.27,34.44,100,10,10,94,258.8,35.9,3,RETAINED,Y,Y
+2026-02-25,GEV,GE Vernova Inc.,Industrials,240.72,884.64,100,10,10,93,1342.5,36.4,3,RETAINED,Y,Y
+2026-02-25,EFXT,Enerflex Ltd.,Energy,2.43,19.81,96,10,9,91,146.7,38.5,3,RETAINED,Y,Y
+2026-02-25,BELFB,Bel Fuse Inc.,Technology,2.99,237.04,93,10,8,95,1136.1,19.4,3,RETAINED,N,Y
+2026-02-25,AEIS,"Advanced Energy Industries, Inc.",Industrials,12.96,343.85,93,10,8,94,111.7,21.0,3,RETAINED,Y,Y
+2026-02-25,CDE,"Coeur Mining, Inc.",Basic Materials,16.06,25.29,91,8,10,97,604.9,81.6,3,RETAINED,Y,Y
+2026-02-25,STX,Seagate Technology Holdings plc,Technology,91.51,417.68,91,9,9,96,74.4,30.8,3,RETAINED,Y,Y
+2026-02-25,CGAU,Centerra Gold Inc.,Basic Materials,3.90,19.39,91,8,10,95,456.6,30.7,3,RETAINED,Y,Y
+2026-02-25,DY,"Dycom Industries, Inc.",Industrials,12.79,427.01,91,8,10,88,225.6,33.9,3,RETAINED,Y,Y
+2026-02-25,ARIS,Aris Mining Corporation,Basic Materials,4.43,21.61,90,8,9,97,93.7,70.9,3,RETAINED,Y,Y
+2026-02-25,FSM,Fortuna Mining Corp.,Basic Materials,4.17,13.63,90,10,7,93,989.5,-16.8,3,RETAINED,N,Y
+2026-02-25,NGL,NGL Energy Partners LP,Energy,1.52,12.15,90,10,7,92,243.8,11.0,3,RETAINED,N,Y
+2026-02-25,LITE,Lumentum Holdings Inc.,Technology,53.52,754.03,89,10,7,99,77.3,56.5,3,RETAINED,Y,N
+2026-02-25,NGD,New Gold Inc.,Basic Materials,9.80,12.48,89,8,10,97,158.3,76.4,3,RETAINED,Y,Y
+2026-02-25,FIX,"Comfort Systems USA, Inc.",Industrials,51.95,1490.97,89,10,7,96,99.9,31.2,3,RETAINED,Y,N
+2026-02-25,IAG,IAMGOLD Corporation,Basic Materials,13.66,23.11,89,8,10,96,61.7,50.4,3,RETAINED,Y,Y
+2026-02-25,CSTM,Constellium SE,Basic Materials,3.55,25.58,89,10,7,91,102.7,38.3,3,RETAINED,Y,N
+2026-02-25,ENLT,Enlight Renewable Energy Ltd,Utilities,9.18,70.25,88,9,8,97,327.2,21.3,1,NEW,Y,Y
+2026-02-25,FTI,TechnipFMC plc,Energy,26.77,65.21,88,10,7,90,37.8,11.8,3,RETAINED,N,Y
+2026-02-25,OR,OR Royalties Inc.,Basic Materials,8.58,45.56,88,8,9,89,1050.1,28.3,3,RETAINED,Y,Y
+2026-02-25,WPM,Wheaton Precious Metals Corp.,Basic Materials,71.48,158.02,87,8,8,91,316.6,25.2,3,RETAINED,Y,Y
+2026-02-25,ALM,Almonty Industries Inc.,Basic Materials,4.33,16.98,86,8,9,99,514.2,38.5,3,RETAINED,Y,Y
+2026-02-25,FN,Fabrinet,Technology,22.10,620.00,86,8,8,93,38.6,29.9,3,RETAINED,Y,Y
+2026-02-25,KEP,Korea Electric Power Corporation,Utilities,29.44,23.04,86,8,9,91,269.7,21.4,3,RETAINED,Y,Y
+2026-02-25,VIK,Viking Holdings Ltd,Consumer Cyclical,34.47,77.75,86,7,10,77,343.9,48.2,3,RETAINED,N,Y
+2026-02-25,AU,AngloGold Ashanti plc,Basic Materials,64.03,126.89,85,10,6,96,42.3,38.1,3,RETAINED,Y,N
+2026-02-25,HLIO,"Helios Technologies, Inc.",Industrials,2.44,74.27,85,8,8,88,114.6,22.7,3,RETAINED,Y,Y
+2026-02-25,TPB,"Turning Point Brands, Inc.",Consumer Defensive,2.65,136.99,85,7,10,87,771.1,140.5,3,RETAINED,Y,Y
+2026-02-25,ADI,"Analog Devices, Inc.",Technology,177.13,361.66,85,8,8,84,101.3,26.9,3,RETAINED,N,Y
+2026-02-25,NVST,Envista Holdings Corporation,Healthcare,4.85,29.58,85,8,8,82,82.8,21.7,3,RETAINED,N,Y
+2026-02-25,KN,Knowles Corporation,Technology,2.40,28.41,85,8,8,80,950.0,22.7,3,RETAINED,N,Y
+2026-02-25,AG,First Majestic Silver Corp.,Basic Materials,14.62,29.94,84,10,6,98,100.2,65.4,3,RETAINED,Y,N
+2026-02-25,SSRM,SSR Mining Inc.,Basic Materials,6.22,30.57,84,8,7,93,1078.1,19.4,3,RETAINED,N,Y
+2026-02-25,B,Barrick Mining Corporation,Basic Materials,83.58,50.13,84,7,10,91,407.6,91.6,3,RETAINED,Y,Y
+2026-02-25,ASML,ASML Holding N.V.,Technology,599.27,1540.32,84,8,7,90,20.6,25.5,3,RETAINED,N,Y
+2026-02-25,WFRD,Weatherford International plc,Energy,7.49,105.46,84,8,8,86,81.6,8.0,3,RETAINED,N,Y
+2026-02-25,EIX,Edison International,Utilities,28.37,74.27,84,7,10,76,117.6,44.3,3,RETAINED,N,Y
+2026-02-25,GOLF,Acushnet Holdings Corp.,Consumer Cyclical,5.79,99.25,84,7,10,72,4246.9,47.7,3,RETAINED,N,Y
+2026-02-25,ELE,Elemental Royalty Corporation,Basic Materials,1.45,22.66,83,8,8,95,924.6,24.4,3,RETAINED,Y,Y
+2026-02-25,PLAB,"Photronics, Inc.",Technology,2.62,43.92,83,10,6,95,44.2,1.7,3,RETAINED,N,Y
+2026-02-25,KGC,Kinross Gold Corporation,Basic Materials,43.82,36.10,83,7,9,93,112.2,27.3,3,RETAINED,Y,Y
+2026-02-25,VRT,Vertiv Holdings Co,Industrials,98.70,259.68,83,8,7,93,170.9,41.5,3,RETAINED,Y,N
+2026-02-25,TEVA,Teva Pharmaceutical Industries Limited,Healthcare,39.48,33.99,83,7,9,87,124.3,21.1,3,RETAINED,Y,Y
+2026-02-25,MNST,Monster Beverage Corporation,Consumer Defensive,83.08,84.55,83,7,9,74,93.7,21.3,3,RETAINED,N,Y
+2026-02-25,BTG,B2Gold Corp.,Basic Materials,8.18,6.12,82,7,9,89,62.6,56.7,3,RETAINED,Y,Y
+2026-02-25,MTZ,"MasTec, Inc.",Industrials,22.47,289.43,82,8,7,89,115.0,16.6,3,RETAINED,N,Y
+2026-02-25,SNEX,StoneX Group Inc.,Financial Services,6.63,127.27,82,8,7,85,93.9,5.8,3,RETAINED,N,Y
+2026-02-25,CCJ,Cameco Corporation,Energy,53.13,122.38,81,7,9,92,185.3,52.1,2,RETAINED,Y,Y
+2026-02-25,CW,Curtiss-Wright Corporation,Industrials,25.94,712.65,81,8,7,88,35.2,17.5,3,RETAINED,N,Y
+2026-02-25,TPR,"Tapestry, Inc.",Consumer Cyclical,31.48,154.22,81,8,7,87,176.1,57.9,3,RETAINED,Y,N
+2026-02-25,CTRE,"CareTrust REIT, Inc.",Real Estate,9.02,40.72,81,7,9,72,69.1,50.0,3,RETAINED,N,Y
+2026-02-25,NDSN,Nordson Corporation,Industrials,16.20,293.27,81,7,9,72,60.2,22.2,3,RETAINED,N,Y
+2026-02-25,JOE,The St. Joe Company,Real Estate,3.94,68.50,81,7,9,71,104.6,54.4,3,RETAINED,N,Y
+2026-02-25,HBM,Hudbay Minerals Inc.,Basic Materials,11.15,27.88,80,8,7,96,950.9,-40.7,3,RETAINED,N,Y
+2026-02-25,ECO,Okeanis Eco Tankers Corp.,Industrials,2.02,52.40,80,10,5,90,82.3,6.4,3,RETAINED,N,N
+2026-02-25,TIGO,Millicom International Cellular S.A.,Communication Services,11.17,67.71,80,10,5,90,509.4,-0.6,3,RETAINED,N,N
+2026-02-25,HTHT,H World Group Limited,Consumer Cyclical,16.82,55.01,80,7,9,76,2898.0,15.6,3,RETAINED,N,Y
+2026-02-25,AGCO,AGCO Corporation,Industrials,9.99,135.10,80,6,10,72,809.5,42.4,3,RETAINED,N,Y
+2026-02-25,CLMT,"Calumet, Inc.",Basic Materials,2.52,29.13,79,8,7,89,670.0,13.5,3,RETAINED,N,Y
+2026-02-25,KB,KB Financial Group Inc.,Financial Services,42.32,118.87,79,8,7,89,146.9,5.5,3,RETAINED,N,Y
+2026-02-25,PKE,Park Aerospace Corp.,Industrials,0.54,27.54,79,8,7,89,136.8,2.3,3,RETAINED,N,Y
+2026-02-25,SHIP,Seanergy Maritime Holdings Corp,Industrials,0.29,13.77,79,8,7,88,92.1,12.8,3,RETAINED,N,Y
+2026-02-25,INSW,"International Seaways, Inc.",Energy,3.43,69.89,79,8,7,85,96.9,0.9,3,RETAINED,N,Y
+2026-02-25,TEN,Tsakos Energy Navigation Limited,Energy,0.99,32.96,79,8,7,85,98.9,-1.1,3,RETAINED,N,Y
+2026-02-25,NATR,"Nature's Sunshine Products, Inc.",Consumer Defensive,0.48,26.86,79,8,7,82,1561.7,8.6,3,RETAINED,N,Y
+2026-02-25,GVA,Granite Construction Incorporated,Industrials,5.90,136.47,79,8,7,80,54.6,66.6,3,RETAINED,N,N
+2026-02-25,MG,"Mistras Group, Inc.",Industrials,0.47,15.06,79,8,7,80,152.4,13.2,3,RETAINED,N,Y
+2026-02-25,VICR,Vicor Corporation,Technology,8.84,198.66,78,10,5,98,176.1,14.8,3,RETAINED,N,N
+2026-02-25,MTSI,"MACOM Technology Solutions Holdings, Inc.",Technology,19.09,253.77,78,10,5,90,54.0,15.1,3,RETAINED,N,N
+2026-02-25,AGI,Alamos Gold Inc.,Basic Materials,21.26,50.58,78,6,9,89,215.4,23.0,3,RETAINED,Y,Y
+2026-02-25,FNV,Franco-Nevada Corporation,Basic Materials,53.09,274.17,78,6,9,86,63.9,51.9,3,RETAINED,Y,Y
+2026-02-25,MSGE,Madison Square Garden Entertainment Corp.,Consumer Cyclical,2.86,60.55,78,5,10,81,1053.7,89.7,3,RETAINED,N,Y
+2026-02-25,NOC,Northrop Grumman Corporation,Industrials,99.07,699.14,78,6,9,75,196.7,23.7,3,RETAINED,N,Y
+2026-02-25,GFI,Gold Fields Limited,Basic Materials,52.19,58.49,77,8,6,93,196.8,71.4,3,RETAINED,Y,N
+2026-02-25,AEM,Agnico Eagle Mines Limited,Basic Materials,121.50,242.32,77,8,7,91,86.9,44.4,3,RETAINED,Y,N
+2026-02-25,CPS,Cooper-Standard Holdings Inc.,Consumer Cyclical,0.68,38.80,77,8,7,90,114.4,0.8,3,RETAINED,N,Y
+2026-02-25,LUV,Southwest Airlines Co.,Industrials,25.59,49.76,77,7,7,85,116.8,15.8,3,RETAINED,N,Y
+2026-02-25,GOLD,"Gold.com, Inc.",Financial Services,1.57,56.17,76,6,8,96,36.2,115.2,3,RETAINED,Y,Y
+2026-02-25,VAL,Valaris Limited,Energy,6.53,94.60,76,10,4,94,40.7,1.9,3,RETAINED,N,N
+2026-02-25,DBD,"Diebold Nixdorf, Incorporated",Technology,2.90,81.13,76,8,6,83,497.6,31.3,3,RETAINED,N,N
+2026-02-25,GLW,Corning Incorporated,Technology,135.16,156.79,75,8,5,96,243.9,22.1,3,RETAINED,Y,N
+2026-02-25,ALNT,Allient Inc.,Technology,1.14,67.80,75,10,4,90,115.0,13.7,3,RETAINED,N,N
+2026-02-25,BWLP,BW LPG Limited,Industrials,2.60,17.26,75,7,7,83,84.9,11.9,3,RETAINED,N,Y
+2026-02-25,PANL,Pangaea Logistics Solutions Ltd.,Industrials,0.59,9.05,75,8,6,82,44.7,14.6,3,RETAINED,N,Y
+2026-02-25,GE,GE Aerospace,Industrials,360.21,344.60,75,7,7,77,28.5,28.0,3,RETAINED,N,Y
+2026-02-25,ASA,ASA Gold and Precious Metals Limited,Financial Services,1.47,78.31,73,10,4,95,1196.4,-0.3,1,NEW,N,N
+2026-02-25,BVN,Compañía de Minas Buenaventura S.A.A.,Basic Materials,9.99,39.53,73,8,6,95,136.4,55.6,3,RETAINED,N,N
+2026-02-25,KEYS,"Keysight Technologies, Inc.",Technology,52.22,304.26,73,10,4,90,37.9,9.3,3,RETAINED,N,N
+2026-02-25,CGNX,Cognex Corporation,Technology,9.50,57.65,73,7,6,89,38.4,16.8,1,NEW,N,Y
+2026-02-25,REZI,"Resideo Technologies, Inc.",Industrials,6.03,40.98,73,7,7,88,578.3,0.3,3,RETAINED,N,Y
+2026-02-25,NSSC,"Napco Security Technologies, Inc.",Industrials,1.63,45.97,73,7,7,81,33.4,9.6,3,RETAINED,N,Y
+2026-02-25,DRD,DRDGOLD Limited,Basic Materials,3.24,37.40,72,8,6,93,98.7,32.9,1,NEW,Y,N
+2026-02-25,MYE,"Myers Industries, Inc.",Consumer Cyclical,0.83,22.56,72,7,7,87,65.0,0.8,3,RETAINED,N,Y
+2026-02-25,EZPW,"EZCORP, Inc.",Financial Services,1.57,25.71,72,8,5,86,74.5,24.7,3,RETAINED,Y,N
+2026-02-25,VALE,Vale S.A.,Basic Materials,74.19,17.16,72,7,7,85,286.9,2.9,3,RETAINED,N,Y
+2026-02-25,BTSG,"BrightSpring Health Services, Inc.",Healthcare,7.34,41.05,72,7,7,83,249.0,9.2,3,RETAINED,N,Y
+2026-02-25,DIOD,Diodes Incorporated,Technology,3.28,70.99,72,6,7,83,129.9,17.9,3,RETAINED,N,Y
+2026-02-25,ORLA,Orla Mining Ltd.,Basic Materials,6.75,20.01,71,8,5,94,88.9,196.4,3,RETAINED,N,N
+2026-02-25,PAAS,Pan American Silver Corp.,Basic Materials,27.61,65.35,71,8,5,94,56.7,4.8,3,RETAINED,N,N
+2026-02-25,IESC,"IES Holdings, Inc.",Industrials,10.16,515.58,71,10,3,91,29.4,4.4,3,RETAINED,N,N
+2026-02-25,LPG,Dorian LPG Ltd.,Energy,1.51,35.25,71,7,6,88,483.2,58.1,3,RETAINED,Y,N
+2026-02-25,AIR,AAR Corp.,Industrials,4.62,117.78,71,6,7,87,288.8,17.3,3,RETAINED,N,Y
+2026-02-25,BKR,Baker Hughes Company,Energy,63.59,64.74,71,7,7,78,117.9,14.9,3,RETAINED,N,Y
+2026-02-25,HAL,Halliburton Company,Energy,29.64,35.22,71,7,7,78,188.7,4.4,3,RETAINED,N,Y
+2026-02-25,CVE,Cenovus Energy Inc.,Energy,41.32,22.02,71,7,7,76,780.8,-13.2,3,RETAINED,N,Y
+2026-02-25,E,Eni S.p.A.,Energy,65.22,44.30,71,7,7,74,249.1,-14.0,3,RETAINED,N,Y
+2026-02-25,NGS,"Natural Gas Services Group, Inc.",Energy,0.48,37.66,71,7,7,74,101.9,6.7,3,RETAINED,N,Y
+2026-02-25,NPO,Enpro Inc.,Industrials,5.66,273.83,71,7,7,72,55.4,10.9,3,RETAINED,N,Y
+2026-02-25,VTOL,Bristow Group Inc.,Energy,1.32,46.22,71,7,7,70,62.1,9.3,1,NEW,N,Y
+2026-02-25,ECG,"Everus Construction Group, Inc.",Industrials,6.40,123.95,70,8,5,92,65.3,29.9,3,RETAINED,Y,N
+2026-02-25,TTC,The Toro Company,Industrials,9.67,100.07,70,7,6,77,38.3,7.2,3,RETAINED,N,Y
+2026-02-25,R,"Ryder System, Inc.",Industrials,8.75,224.73,70,7,6,76,34.7,1.5,3,RETAINED,N,Y
+2026-02-25,UI,Ubiquiti Inc.,Technology,45.67,765.43,69,8,5,89,29.5,22.7,3,RETAINED,N,N
+2026-02-25,MYRG,MYR Group Inc.,Industrials,4.26,278.30,69,8,5,88,101.2,14.5,3,RETAINED,N,N
+2026-02-25,BAP,Credicorp Ltd.,Financial Services,28.19,355.24,69,5,8,87,54.3,17.6,3,RETAINED,N,Y
+2026-02-25,JBL,Jabil Inc.,Technology,29.28,271.08,69,8,5,83,24.8,23.4,3,RETAINED,N,N
+2026-02-25,MUFG,"Mitsubishi UFJ Financial Group, Inc.",Financial Services,209.50,18.44,69,6,7,71,356.6,17.9,3,RETAINED,N,Y
+2026-02-25,SKYT,"SkyWater Technology, Inc.",Technology,1.41,28.88,68,6,7,96,21109.6,99.7,3,RETAINED,N,N
+2026-02-25,CC,The Chemours Company,Basic Materials,2.70,18.06,68,6,7,83,650.0,7.2,3,RETAINED,N,Y
+2026-02-25,IX,ORIX Corporation,Financial Services,39.28,35.52,68,8,4,83,48.5,25.3,3,RETAINED,N,N
+2026-02-25,HSBC,HSBC Holdings plc,Financial Services,319.32,93.09,68,6,7,82,1405.4,6.9,3,RETAINED,N,Y
+2026-02-25,HG,"Hamilton Insurance Group, Ltd.",Financial Services,3.03,30.43,67,7,6,73,301.5,16.9,3,RETAINED,N,N
+2026-02-25,BEN,"Franklin Resources, Inc.",Financial Services,14.11,27.04,67,6,7,72,68.8,10.2,3,RETAINED,N,Y
+2026-02-25,SON,Sonoco Products Company,Consumer Cyclical,5.46,55.51,67,6,7,72,186.1,478.4,3,RETAINED,N,N
+2026-02-25,HCSG,"Healthcare Services Group, Inc.",Healthcare,1.50,21.39,66,8,4,82,81.4,4.2,3,RETAINED,N,N
+2026-02-25,CUK,Carnival Corporation & plc,Consumer Cyclical,40.91,31.11,66,7,5,80,441.0,9.0,3,RETAINED,N,N
+2026-02-25,NMR,"Nomura Holdings, Inc.",Financial Services,26.79,9.11,66,6,7,73,27.2,40.1,3,RETAINED,N,Y
+2026-02-25,WTTR,"Select Water Solutions, Inc.",Energy,1.65,13.49,66,6,7,71,63.6,-7.7,1,NEW,N,Y
+2026-02-25,DG,Dollar General Corporation,Consumer Defensive,34.26,155.43,65,8,4,89,47.8,3.3,3,RETAINED,N,N
+2026-02-25,APH,Amphenol Corporation,Technology,185.79,151.58,65,5,7,84,62.0,33.8,3,RETAINED,N,N
+2026-02-25,CASY,"Casey's General Stores, Inc.",Consumer Cyclical,25.08,680.67,65,7,5,77,136.9,15.4,3,RETAINED,N,N
+2026-02-25,SCHL,Scholastic Corporation,Communication Services,0.85,32.92,65,4,9,76,1452.8,64.3,3,RETAINED,N,Y
+2026-02-25,COHR,Coherent Corp.,Technology,51.28,275.27,64,8,4,96,833.8,12.5,3,RETAINED,N,N
+2026-02-25,ESLT,Elbit Systems Ltd.,Industrials,34.81,747.74,64,8,3,92,48.2,-0.4,3,RETAINED,N,N
+2026-02-25,TATT,TAT Technologies Ltd.,Industrials,0.70,55.07,64,6,6,88,35.4,12.6,3,RETAINED,N,Y
+2026-02-25,CDLR,Cadeler A/S,Industrials,2.30,26.20,64,5,7,87,73.4,79.5,3,RETAINED,Y,N
+2026-02-25,LYG,Lloyds Banking Group plc,Financial Services,84.00,5.71,64,6,6,78,23.6,23.0,3,RETAINED,N,Y
+2026-02-25,AZZ,AZZ Inc.,Industrials,4.03,135.25,64,6,6,76,103.3,21.0,3,RETAINED,N,N
+2026-02-25,TEL,TE Connectivity plc,Technology,69.82,241.08,64,5,7,71,5669.2,12.7,1,NEW,N,Y
+2026-02-25,NEM,Newmont Corporation,Basic Materials,137.00,125.36,63,8,4,92,30.6,-2.3,3,RETAINED,N,N
+2026-02-25,OII,"Oceaneering International, Inc.",Energy,3.76,37.98,63,8,3,88,27.1,4.1,3,RETAINED,N,N
+2026-02-25,DOCN,"DigitalOcean Holdings, Inc.",Technology,5.89,63.77,63,5,7,84,767.0,12.1,3,RETAINED,N,Y
+2026-02-25,NGVT,Ingevity Corporation,Basic Materials,2.55,70.00,63,5,7,80,162.0,11.5,3,RETAINED,N,Y
+2026-02-25,CLH,"Clean Harbors, Inc.",Industrials,15.19,285.00,63,6,6,73,41.5,8.3,3,RETAINED,N,Y
+2026-02-25,TFPM,Triple Flag Precious Metals Corp.,Basic Materials,8.27,39.75,62,7,4,87,50.0,25.9,3,RETAINED,Y,N
+2026-02-25,CFG,"Citizens Financial Group, Inc.",Financial Services,26.94,62.72,62,6,6,72,41.6,11.5,3,RETAINED,N,Y
+2026-02-25,NTR,Nutrien Ltd.,Basic Materials,35.14,71.70,62,7,5,71,310.6,18.3,3,RETAINED,N,N
+2026-02-25,WWD,"Woodward, Inc.",Industrials,23.68,393.04,61,8,3,89,22.7,12.8,3,RETAINED,N,N
+2026-02-25,ROG,Rogers Corporation,Technology,1.99,109.96,61,5,7,75,1620.0,12.4,3,RETAINED,N,Y
+2026-02-25,BNS,The Bank of Nova Scotia,Financial Services,93.74,75.05,61,5,7,70,93.5,3.5,3,RETAINED,N,Y
+2026-02-25,TEX,Terex Corporation,Industrials,7.67,68.76,60,7,4,86,200.0,7.2,3,RETAINED,N,N
+2026-02-25,PHIN,PHINIA Inc.,Consumer Cyclical,2.98,77.77,60,7,4,84,73.1,11.7,3,RETAINED,N,N
+2026-02-25,KNSA,"Kiniksa Pharmaceuticals International, plc",Healthcare,3.20,43.19,60,5,6,81,107.4,47.6,3,RETAINED,N,N
+2026-02-25,MFG,"Mizuho Financial Group, Inc.",Financial Services,106.81,8.64,60,3,9,77,997.7,32.3,3,RETAINED,N,Y
+2026-02-25,SN,"SharkNinja, Inc.",Consumer Cyclical,17.76,127.09,60,7,4,77,46.6,-8.8,3,RETAINED,N,N
+2026-02-25,FCFS,"FirstCash Holdings, Inc.",Financial Services,8.06,184.41,60,7,4,75,24.6,26.5,3,RETAINED,N,N
+2026-02-25,TRGP,Targa Resources Corp.,Energy,48.86,229.37,60,7,4,71,36.3,-5.8,1,NEW,N,N
+2026-02-25,SQM,Sociedad Química y Minera de Chile S.A.,Basic Materials,23.24,80.84,59,5,6,88,48.5,9.2,1,NEW,N,Y
+2026-02-25,PRIM,Primoris Services Corporation,Industrials,8.00,152.15,59,5,6,86,75.3,25.1,3,RETAINED,Y,N
+2026-02-25,KRYS,"Krystal Biotech, Inc.",Healthcare,7.89,271.46,59,4,7,79,74.5,7.3,1,NEW,N,Y
+2026-02-25,AHR,"American Healthcare REIT, Inc.",Real Estate,9.79,52.77,59,7,4,77,76.0,5.6,3,RETAINED,N,N
+2026-02-25,SMFG,"Sumitomo Mitsui Financial Group, Inc.",Financial Services,141.81,22.23,59,4,7,75,997.6,18.7,3,RETAINED,N,Y
+2026-02-25,HL,Hecla Mining Company,Basic Materials,16.06,24.08,58,5,6,97,744.7,64.0,3,RETAINED,N,N
+2026-02-25,PACS,"PACS Group, Inc.",Healthcare,6.08,39.37,58,7,4,95,40.9,11.3,3,RETAINED,N,N
+2026-02-25,CYD,China Yuchai International Limited,Consumer Cyclical,1.84,48.40,58,6,4,90,107.4,23.0,1,NEW,N,N
+2026-02-25,WS,"Worthington Steel, Inc.",Basic Materials,2.18,43.43,58,6,4,81,36.2,26.8,3,RETAINED,N,N
+2026-02-25,HUBB,Hubbell Incorporated,Industrials,27.73,526.58,58,7,4,72,32.1,9.3,3,RETAINED,N,N
+2026-02-25,PAHC,Phibro Animal Health Corporation,Healthcare,2.12,51.68,57,6,4,86,31.5,7.5,3,RETAINED,N,N
+2026-02-25,ROAD,"Construction Partners, Inc.",Industrials,7.63,136.74,57,5,6,86,308.2,41.6,3,RETAINED,Y,N
+2026-02-25,APG,APi Group Corporation,Industrials,19.82,46.46,57,5,6,79,38.8,12.0,3,RETAINED,N,Y
+2026-02-25,LCII,LCI Industries,Consumer Cyclical,3.37,139.32,57,3,8,71,554.6,29.1,3,RETAINED,N,Y
+2026-02-25,IFS,Intercorp Financial Services Inc.,Financial Services,5.58,50.44,56,6,5,78,59.3,-4.7,3,RETAINED,N,N
+2026-02-25,TEI,Templeton Emerging Markets Income Fund,Financial Services,0.32,6.87,56,7,3,70,409.4,11.1,1,NEW,N,N
+2026-02-25,BHP,BHP Group Limited,Basic Materials,209.67,81.71,55,8,1,86,27.7,10.8,1,NEW,N,N
+2026-02-25,CAAP,Corporación América Airports S.A.,Industrials,4.74,29.04,55,7,3,76,45.7,11.4,3,RETAINED,N,N
+2026-02-25,MOV,"Movado Group, Inc.",Consumer Cyclical,0.57,25.30,55,7,3,74,43.0,6.6,3,RETAINED,N,N
+2026-02-25,ASM,Avino Silver & Gold Mines Ltd.,Basic Materials,1.41,9.05,54,6,4,98,51.3,-13.7,3,RETAINED,N,N
+2026-02-25,UMC,United Microelectronics Corporation,Technology,26.52,10.62,54,4,6,84,48.9,-2.1,3,RETAINED,N,Y
+2026-02-25,TILE,"Interface, Inc.",Consumer Cyclical,1.84,31.14,54,3,7,75,112.0,8.8,3,RETAINED,N,Y
+2026-02-25,CIB,Grupo Cibest S.A.,Financial Services,19.35,75.14,53,4,6,84,28.9,-0.5,3,RETAINED,N,Y
+2026-02-25,WCC,"WESCO International, Inc.",Industrials,14.26,294.13,52,4,6,76,35.1,13.6,3,RETAINED,N,Y
+2026-02-25,HMY,Harmony Gold Mining Company Limited,Basic Materials,13.42,21.54,51,4,5,82,144.7,22.7,1,NEW,N,N
+2026-02-25,HXL,Hexcel Corporation,Industrials,7.32,92.33,48,5,4,76,60.6,7.6,3,RETAINED,N,N
+2026-02-25,CCL,Carnival Corporation & plc,Consumer Cyclical,43.29,31.28,48,4,5,73,441.0,9.0,1,NEW,N,N
+2026-02-25,KALU,Kaiser Aluminum Corporation,Basic Materials,2.11,128.94,45,4,4,85,456.3,10.2,3,RETAINED,N,N
+2026-02-25,GGN,"GAMCO Global Gold, Natural Resources & Income Trust",Financial Services,0.89,5.72,45,5,3,71,244.0,1.3,1,NEW,N,N
+2026-02-25,USFD,US Foods Holding Corp.,Consumer Defensive,21.42,96.57,42,3,5,71,60.0,4.8,3,RETAINED,N,N
+2026-02-25,HSAI,Hesai Group,Consumer Cyclical,4.26,26.78,41,3,4,85,74.3,10.5,3,RETAINED,N,N
+2026-02-25,INTR,"Inter & Co, Inc.",Financial Services,3.95,8.97,29,2,3,73,22.2,17.2,3,RETAINED,N,N

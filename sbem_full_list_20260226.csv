@@ -1,0 +1,78 @@
+Date,Ticker,Company,Sector,Market Cap (B),Price,Breakout Readiness Score,Tech Score,Fund Score,RS Rank,EPS Growth %,Rev Growth %,Streak (days),Status,Strict,EPS Accel
+2026-02-26,GVT&D.NS,GE Vernova T&D India Ltd,Industrials,989.47,3864.40,96,10,9,99,103.8,58.4,1,NEW,Y,Y
+2026-02-26,MTARTECH.NS,MTAR Technologies Limited,Industrials,113.50,3683.40,96,10,9,99,117.3,58.9,1,NEW,Y,Y
+2026-02-26,SJS.NS,S.J.S. Enterprises Limited,Consumer Cyclical,58.18,1819.60,96,10,9,95,61.9,36.4,1,NEW,Y,Y
+2026-02-26,SHARDACROP.NS,Sharda Cropchem Limited,Basic Materials,106.52,1179.00,91,9,9,98,365.9,38.7,1,NEW,Y,Y
+2026-02-26,ABCAPITAL.NS,Aditya Birla Capital Limited,Financial Services,932.44,356.15,89,10,7,95,33.5,27.9,1,NEW,Y,Y
+2026-02-26,UJJIVANSFB.NS,Ujjivan Small Finance Bank Limited,Financial Services,119.56,61.60,88,9,8,94,71.0,22.4,1,NEW,Y,Y
+2026-02-26,NAVINFLUOR.NS,Navin Fluorine International Limited,Basic Materials,332.84,6484.50,88,8,9,88,121.8,47.2,1,NEW,Y,Y
+2026-02-26,TITAN.NS,Titan Company Limited,Consumer Cyclical,3852.08,4342.60,88,8,9,82,60.8,42.0,1,NEW,N,Y
+2026-02-26,SBC.NS,SBC Exports Limited,Industrials,15.33,32.19,87,10,7,98,1150.8,8.5,1,NEW,N,Y
+2026-02-26,AGIIL.NS,AGI Infra Limited,Real Estate,37.78,308.95,87,10,7,94,65.9,5.1,1,NEW,N,Y
+2026-02-26,MRPL.NS,Mangalore Refinery and Petrochemicals Limited,Energy,345.89,197.14,87,10,7,94,369.1,13.0,1,NEW,N,Y
+2026-02-26,RBLBANK.NS,RBL Bank Limited,Financial Services,201.88,326.85,87,10,7,94,381.7,1.9,1,NEW,N,Y
+2026-02-26,VEDL.NS,Vedanta Limited,Basic Materials,2882.08,737.45,86,8,9,97,61.0,37.3,1,NEW,Y,Y
+2026-02-26,SEAMECLTD.NS,Seamec Limited,Industrials,33.87,1327.60,86,8,9,95,131.8,64.0,1,NEW,Y,Y
+2026-02-26,TDPOWERSYS.NS,TD Power Systems Limited,Industrials,137.71,881.55,85,10,6,99,25.3,26.4,1,NEW,N,Y
+2026-02-26,GLOBAL.NS,Global Education Limited,Consumer Defensive,5.35,105.07,85,10,6,96,20.8,55.2,1,NEW,N,Y
+2026-02-26,MAHABANK.NS,Bank of Maharashtra,Financial Services,581.87,75.65,85,10,6,93,27.4,16.7,1,NEW,N,Y
+2026-02-26,GESHIP.NS,The Great Eastern Shipping Company Limited,Industrials,192.25,1346.60,85,8,8,89,123.8,22.6,1,NEW,Y,Y
+2026-02-26,POLYCAB.NS,Polycab India Limited,Industrials,1281.93,8506.00,85,7,9,86,35.9,45.4,1,NEW,Y,Y
+2026-02-26,APEX.NS,Apex Frozen Foods Limited,Consumer Defensive,13.26,423.25,84,10,6,98,413.6,36.4,1,NEW,Y,N
+2026-02-26,THANGAMAYL.NS,Thangamayil Jewellery Limited,Consumer Cyclical,121.49,3908.80,84,10,6,98,117.4,112.2,1,NEW,Y,N
+2026-02-26,CCL.NS,CCL Products (India) Limited,Consumer Defensive,137.69,1033.75,84,7,9,88,59.0,38.5,1,NEW,Y,Y
+2026-02-26,TVSMOTOR.NS,TVS Motor Company Limited,Consumer Cyclical,1878.09,3954.20,84,8,8,88,48.6,33.7,1,NEW,Y,Y
+2026-02-26,NYKAA.NS,FSN E-Commerce Ventures Limited,Consumer Cyclical,765.95,267.53,84,7,9,85,212.0,43.9,1,NEW,Y,Y
+2026-02-26,KARURVYSYA.NS,The Karur Vysya Bank Limited,Financial Services,325.03,336.25,83,10,6,97,39.1,13.1,1,NEW,N,Y
+2026-02-26,PRICOLLTD.NS,Pricol Limited,Consumer Cyclical,75.29,617.70,83,7,9,81,53.7,65.7,1,NEW,N,Y
+2026-02-26,CANBK.NS,Canara Bank,Financial Services,1441.15,158.88,82,10,6,92,24.7,-36.2,1,NEW,N,Y
+2026-02-26,NAM-INDIA.NS,Nippon Life India Asset Management Limited,Financial Services,601.41,943.65,82,9,6,91,36.7,20.0,1,NEW,N,Y
+2026-02-26,GAEL.NS,Gujarat Ambuja Exports Limited,Consumer Defensive,66.29,144.53,82,8,7,88,106.6,20.0,1,NEW,N,Y
+2026-02-26,LAURUSLABS.NS,Laurus Labs Limited,Healthcare,590.03,1092.75,81,10,5,94,172.7,25.7,1,NEW,Y,N
+2026-02-26,CRAFTSMAN.NS,Craftsman Automation Limited,Consumer Cyclical,184.99,7754.50,81,10,5,93,60.4,20.8,1,NEW,Y,N
+2026-02-26,GLENMARK.NS,Glenmark Pharmaceuticals Limited,Healthcare,599.69,2124.30,81,7,8,87,8571.2,20.7,1,NEW,Y,Y
+2026-02-26,LUMAXTECH.NS,Lumax Auto Technologies Limited,Consumer Cyclical,119.15,1748.20,80,10,5,99,41.3,35.8,1,NEW,Y,N
+2026-02-26,CHENNPETRO.NS,Chennai Petroleum Corporation Limited,Energy,136.60,916.45,79,7,8,92,4720.0,21.3,1,NEW,N,Y
+2026-02-26,HAPPYFORGE.NS,HAPPY FORGINGS LIMITED,Industrials,126.81,1344.40,79,10,5,91,22.3,10.4,1,NEW,N,Y
+2026-02-26,PRIVISCL.NS,Privi Speciality Chemicals Limited,Basic Materials,117.08,2997.20,79,7,8,91,75.5,23.2,1,NEW,Y,Y
+2026-02-26,BLISSGVS.NS,Bliss GVS Pharma Limited,Healthcare,23.01,217.37,78,9,6,94,49.7,14.8,1,NEW,N,Y
+2026-02-26,RISHABH.NS,Rishabh Instruments Limited,Technology,16.51,428.55,78,8,7,92,212.0,4.4,1,NEW,N,Y
+2026-02-26,BAJAJCON.NS,Bajaj Consumer Care Limited,Consumer Defensive,52.62,402.85,77,10,4,99,49.7,24.1,1,NEW,Y,N
+2026-02-26,RACLGEAR.NS,RACL Geartech Limited,Consumer Cyclical,16.80,1425.40,77,8,7,98,84.3,6.7,1,NEW,N,Y
+2026-02-26,JKTYRE.NS,JK Tyre & Industries Limited,Consumer Cyclical,153.10,530.65,77,8,7,95,295.0,15.0,1,NEW,N,Y
+2026-02-26,BEL.NS,Bharat Electronics Limited,Industrials,3282.46,449.05,77,8,6,91,20.5,24.0,1,NEW,N,Y
+2026-02-26,RICOAUTO.NS,Rico Auto Industries Limited,Consumer Cyclical,17.76,131.23,77,10,4,91,45.9,27.1,1,NEW,Y,N
+2026-02-26,PRECWIRE.NS,Precision Wires India Limited,Industrials,56.14,306.98,76,10,4,97,27.4,39.6,1,NEW,N,N
+2026-02-26,MBAPL.NS,Madhya Bharat Agro Products Limited,Basic Materials,41.66,475.45,76,8,6,92,77.4,115.8,1,NEW,Y,N
+2026-02-26,HEG.NS,HEG Limited,Industrials,112.57,583.35,76,6,8,89,180.9,24.6,1,NEW,Y,Y
+2026-02-26,TATASTEEL.NS,Tata Steel Limited,Basic Materials,2687.93,215.52,75,10,4,93,106.7,1.7,1,NEW,N,N
+2026-02-26,IOC.NS,Indian Oil Corporation Limited,Energy,2633.19,186.47,75,10,4,90,514.9,5.7,1,NEW,N,N
+2026-02-26,INDSWFTLAB.NS,Ind-Swift Laboratories Limited,Healthcare,12.22,149.35,73,9,5,98,73.7,17.1,1,NEW,N,N
+2026-02-26,KEI.NS,KEI Industries Limited,Industrials,478.87,5009.10,73,7,6,85,42.5,19.5,1,NEW,N,Y
+2026-02-26,JBCHEPHARM.NS,J. B. Chemicals & Pharmaceuticals Limited,Healthcare,334.25,2081.40,73,7,6,82,35.8,19.2,1,NEW,N,Y
+2026-02-26,SAILIFE.NS,SAI LIFE SCIENCES LIMITED,Healthcare,204.12,964.50,73,6,8,78,86.4,26.5,1,NEW,N,Y
+2026-02-26,BAJAJ-AUTO.NS,Bajaj Auto Limited,Consumer Cyclical,2823.24,10110.00,73,6,8,74,52.6,26.0,1,NEW,N,Y
+2026-02-26,POWERINDIA.NS,Hitachi Energy India Limited,Industrials,1133.02,25401.00,72,8,5,98,90.3,27.7,1,NEW,Y,N
+2026-02-26,SCI.NS,The Shipping Corporation of India Limited,Industrials,124.93,268.20,72,8,5,92,118.7,23.3,1,NEW,Y,N
+2026-02-26,ONGC.NS,Oil and Natural Gas Corporation Limited,Energy,3523.74,280.10,72,6,8,79,36.8,43.7,1,NEW,N,Y
+2026-02-26,RRKABEL.NS,R R Kabel Limited,Industrials,171.82,1519.20,71,7,6,81,72.4,42.3,1,NEW,N,N
+2026-02-26,STYLAMIND.NS,Stylam Industries Limited,Consumer Cyclical,37.58,2217.20,71,7,7,79,55.6,2.1,1,NEW,N,Y
+2026-02-26,GRAPHITE.NS,Graphite India Limited,Industrials,142.74,730.15,70,10,3,95,35.7,8.9,1,NEW,N,N
+2026-02-26,APLAPOLLO.NS,APL Apollo Tubes Limited,Basic Materials,618.27,2226.40,70,10,3,92,42.9,7.2,1,NEW,N,N
+2026-02-26,TORNTPHARM.NS,Torrent Pharmaceuticals Limited,Healthcare,1489.09,4399.80,70,8,5,86,27.4,11.7,1,NEW,N,Y
+2026-02-26,MARICO.NS,Marico Limited,Consumer Defensive,1043.69,805.75,68,5,8,78,30.3,34.4,1,NEW,N,Y
+2026-02-26,NDLVENTURE.NS,NDL Ventures Limited,Communication Services,3.80,113.00,67,7,5,84,253.9,0.0,1,NEW,N,Y
+2026-02-26,AETHER.NS,Aether Industries Limited,Basic Materials,127.61,961.40,67,6,7,77,28.2,32.0,1,NEW,N,Y
+2026-02-26,DCBBANK.NS,DCB Bank Limited,Financial Services,60.56,187.88,66,7,6,91,22.0,16.4,1,NEW,N,Y
+2026-02-26,ANANDRATHI.NS,Anand Rathi Wealth Limited,Financial Services,255.16,3073.10,66,6,6,88,29.6,22.2,1,NEW,N,Y
+2026-02-26,BPCL.NS,Bharat Petroleum Corporation Limited,Energy,1674.66,386.00,66,8,4,87,88.9,5.2,1,NEW,N,N
+2026-02-26,GNA.NS,G N A Axles Limited,Consumer Cyclical,18.10,421.65,65,7,5,89,25.6,7.2,1,NEW,N,Y
+2026-02-26,UNIPARTS.NS,Uniparts India Limited,Industrials,21.01,465.95,63,7,4,81,46.0,27.0,1,NEW,N,N
+2026-02-26,MCX.NS,Multi Commodity Exchange of India Limited,Financial Services,625.82,2458.90,62,7,5,97,196.1,284.4,1,NEW,N,N
+2026-02-26,ABSLAMC.NS,Aditya Birla Sun Life AMC Limited,Financial Services,264.00,912.85,62,6,5,89,20.1,7.4,1,NEW,N,Y
+2026-02-26,EDELWEISS.NS,Edelweiss Financial Services Limited,Financial Services,111.97,118.20,61,4,7,72,150.5,648.7,1,NEW,N,Y
+2026-02-26,ADANIPORTS.NS,Adani Ports and Special Economic Zone Limited,Industrials,3572.52,1550.60,59,6,4,80,21.2,21.9,1,NEW,N,N
+2026-02-26,RPTECH.NS,Rashi Peripherals Limited,Technology,24.28,368.50,59,6,5,79,43.4,35.6,1,NEW,N,N
+2026-02-26,JSL.NS,Jindal Stainless Limited,Basic Materials,666.51,809.15,58,5,6,77,40.2,4.4,1,NEW,N,Y
+2026-02-26,JSWSTEEL.NS,JSW Steel Limited,Basic Materials,3128.33,1280.60,55,6,4,79,198.3,10.8,1,NEW,N,N
+2026-02-26,RAMCOCEM.NS,The Ramco Cements Limited,Basic Materials,269.42,1140.20,42,4,4,80,111.4,6.2,1,NEW,N,N

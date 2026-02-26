@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SEPA Screener — Setup Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg:#0b0d11; --surface:#111318; --surface2:#161a22;
+  --border:#1e2433; --border2:#252d3d;
+  --text:#e2e8f0; --text2:#94a3b8; --text3:#475569;
+  --green:#10b981; --green-d:rgba(16,185,129,.12);
+  --blue:#3b82f6;  --blue-d:rgba(59,130,246,.12);
+  --orange:#f59e0b;--orange-d:rgba(245,158,11,.12);
+  --red:#ef4444;   --red-d:rgba(239,68,68,.12);
+  --purple:#a855f7;--purple-d:rgba(168,85,247,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.75}
+.wrap{max-width:860px;margin:0 auto;padding:40px 24px}
+
+/* hero */
+.hero{background:linear-gradient(135deg,#0d1f2d,#111827 50%,#0b0d11);border:1px solid var(--border2);border-radius:16px;padding:36px 40px;margin-bottom:48px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-d);color:#34d399;border:1px solid rgba(16,185,129,.25);border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;letter-spacing:.04em;margin-bottom:14px}
+.hero h1{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:10px}
+.hero h1 span{color:var(--green)}
+.hero p{color:var(--text2);font-size:13.5px;max-width:600px;line-height:1.8}
+.time-badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue-d);color:#60a5fa;border:1px solid rgba(59,130,246,.2);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;margin-top:14px}
+
+/* progress tracker */
+.progress{display:flex;gap:0;margin-bottom:48px;overflow:hidden;border-radius:10px;border:1px solid var(--border)}
+.prog-step{flex:1;padding:12px 8px;text-align:center;font-size:10px;font-weight:700;color:var(--text3);border-right:1px solid var(--border);letter-spacing:.04em;text-transform:uppercase;line-height:1.4;transition:.15s}
+.prog-step:last-child{border-right:none}
+.prog-step span{display:block;font-size:16px;margin-bottom:3px}
+.prog-step.done{background:var(--green-d);color:var(--green)}
+
+/* steps */
+.step{margin-bottom:44px;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.step-header{background:var(--surface2);padding:18px 22px;display:flex;align-items:flex-start;gap:16px;border-bottom:1px solid var(--border)}
+.step-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0}
+.step-header-text h2{font-size:16px;font-weight:800;margin-bottom:3px}
+.step-header-text p{font-size:12px;color:var(--text2)}
+.step-body{padding:22px}
+
+p{font-size:13.5px;color:var(--text2);line-height:1.75;margin-bottom:10px}
+p strong{color:var(--text)}
+h3{font-size:13px;font-weight:700;color:var(--text);margin:18px 0 8px}
+ul,ol{padding-left:18px;margin:6px 0 12px}
+li{font-size:13px;color:var(--text2);margin-bottom:6px;line-height:1.65}
+li strong{color:var(--text)}
+
+/* callouts */
+.callout{border-radius:8px;padding:12px 16px;margin:12px 0;font-size:13px;line-height:1.65;display:flex;gap:10px;border-left:3px solid}
+.callout-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.note{background:var(--blue-d);border-color:var(--blue);color:#93c5fd}
+.tip{background:var(--green-d);border-color:var(--green);color:#6ee7b7}
+.warn{background:var(--orange-d);border-color:var(--orange);color:#fcd34d}
+.danger{background:var(--red-d);border-color:var(--red);color:#fca5a5}
+
+/* code */
+.code-label{font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;font-weight:600}
+.code-block{background:#060809;border:1px solid var(--border);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:8px 0 14px;position:relative}
+code{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#a8d8b9;display:block;white-space:pre;line-height:1.65}
+.copy-btn{position:absolute;top:8px;right:8px;background:var(--surface2);border:1px solid var(--border2);color:var(--text3);border-radius:5px;padding:3px 9px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:600;transition:.15s}
+.copy-btn:hover{color:var(--text);border-color:var(--text3)}
+p code,li code{display:inline;background:var(--surface2);color:#a8d8b9;border:1px solid var(--border2);border-radius:4px;padding:1px 5px;font-size:11.5px;font-family:'JetBrains Mono',monospace}
+
+/* os tabs */
+.os-tabs{display:flex;gap:8px;margin:12px 0 0}
+.os-tab{padding:6px 14px;border-radius:6px 6px 0 0;font-size:11px;font-weight:700;cursor:pointer;background:var(--surface2);color:var(--text3);border:1px solid var(--border);border-bottom:none;transition:.15s}
+.os-tab.active{background:var(--surface);color:var(--text);border-color:var(--border2)}
+.os-panel{display:none;border:1px solid var(--border2);border-radius:0 8px 8px 8px;background:var(--surface)}
+.os-panel.active{display:block}
+.os-panel-inner{padding:16px}
+
+/* file tree */
+.filetree{background:#060809;border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin:10px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text2);line-height:2}
+.filetree .dir{color:#60a5fa}
+.filetree .file{color:#a8d8b9}
+.filetree .note{color:var(--text3);font-style:italic}
+
+/* checklist */
+.checklist{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:10px 0}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-bottom:1px solid var(--border);font-size:12.5px}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px}
+.check-text{color:var(--text2);line-height:1.5}
+.check-text strong{color:var(--text);display:block}
+
+/* what it does section */
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.what-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px}
+.what-card .wc-icon{font-size:20px;margin-bottom:8px}
+.what-card h4{font-size:12.5px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.what-card p{font-size:12px;color:var(--text2);margin:0}
+
+/* result preview */
+.result-preview{background:#060809;border:1px solid var(--border);border-radius:8px;padding:16px;margin:12px 0;overflow-x:auto}
+.result-row{display:flex;gap:12px;align-items:center;padding:6px 0;border-bottom:1px solid #111318;font-size:12px;white-space:nowrap}
+.result-row:last-child{border-bottom:none}
+.result-ticker{color:#e2e8f0;font-weight:800;font-family:'JetBrains Mono',monospace;width:60px;flex-shrink:0}
+.result-badge{border-radius:4px;padding:2px 7px;font-size:10px;font-weight:700;flex-shrink:0}
+.rb-green{background:rgba(16,185,129,.15);color:#34d399}
+.rb-blue{background:rgba(59,130,246,.15);color:#60a5fa}
+.rb-orange{background:rgba(245,158,11,.15);color:#fbbf24}
+.result-meta{color:#475569;font-size:11px}
+
+/* schedule */
+.schedule-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:18px;margin:12px 0}
+.schedule-card h4{font-size:12.5px;font-weight:700;margin-bottom:10px}
+.sched-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px}
+.sched-row:last-child{border-bottom:none}
+.sched-time{color:var(--green);font-family:'JetBrains Mono',monospace;font-size:11px;width:90px;flex-shrink:0}
+.sched-desc{color:var(--text2)}
+
+.divider{height:1px;background:var(--border);margin:24px 0}
+.cm{color:#4a5568}.ck{color:#7ee8a2}.cs{color:#fbd38d}.cn{color:#fc8181}.cc{color:#90cdf4}
+
+@media(max-width:600px){.what-grid{grid-template-columns:1fr}.progress{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🚀 Step-by-Step Setup Guide</div>
+  <h1>SEPA Screener <span>v2.0</span><br>Setup in Plain English</h1>
+  <p>No coding experience needed. This guide walks you through every step —
+     from installing Python to getting your first report in your inbox.</p>
+  <div class="time-badge">⏱️ Total setup time: about 20–30 minutes</div>
+</div>
+
+<!-- PROGRESS TRACKER -->
+<div class="progress">
+  <div class="prog-step done"><span>💻</span>Install Python</div>
+  <div class="prog-step done"><span>📁</span>Create Folder</div>
+  <div class="prog-step done"><span>📦</span>Install Packages</div>
+  <div class="prog-step done"><span>🔑</span>Set Up Keys</div>
+  <div class="prog-step done"><span>▶️</span>Run It</div>
+  <div class="prog-step done"><span>⏰</span>Automate</div>
+</div>
+
+<!-- ═══ WHAT DOES IT DO? ═══ -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--purple-d);color:var(--purple)">?</div>
+    <div class="step-header-text">
+      <h2>What does this screener actually do?</h2>
+      <p>Plain English explanation before you start</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <p>Every evening after the US stock market closes, this program:</p>
+
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="wc-icon">📥</div>
+        <h4>Downloads all US stocks</h4>
+        <p>Fetches 1 year of price history for ~6,000 stocks from Yahoo Finance (free).</p>
+      </div>
+      <div class="what-card">
+        <div class="wc-icon">📐</div>
+        <h4>Checks the Trend Template</h4>
+        <p>Tests all 8 technical criteria (moving averages, 52-week position, RS rank). Think of this as the "is the stock in the right shape?" check.</p>
+      </div>
+      <div class="what-card">
+        <div class="wc-icon">💰</div>
+        <h4>Checks the Fundamentals</h4>
+        <p>For every stock that passes the technical check, looks up earnings growth, revenue growth, and margin trend.</p>
+      </div>
+      <div class="what-card">
+        <div class="wc-icon">📨</div>
+        <h4>Sends you a report</h4>
+        <p>Emails you a clean HTML report and a Telegram message listing every stock that currently meets all criteria.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div><strong>Important:</strong> This tool tells you which stocks <em>currently meet the criteria</em>.
+      It does NOT tell you to buy anything. It does not predict the future.
+      Always do your own research before making any investment decision.</div>
+    </div>
+
+    <p><strong>What the output looks like:</strong></p>
+    <div class="result-preview">
+      <div class="result-row">
+        <span class="result-ticker">NVDA</span>
+        <span class="result-badge rb-green">✅ FULL</span>
+        <span class="result-badge rb-blue">RS: 94</span>
+        <span class="result-badge rb-green">EPS: +85%</span>
+        <span class="result-badge rb-green">Rev: +42%</span>
+        <span class="result-meta">Conf: 88 · Technology</span>
+      </div>
+      <div class="result-row">
+        <span class="result-ticker">AXON</span>
+        <span class="result-badge rb-green">✅ FULL</span>
+        <span class="result-badge rb-blue">RS: 91</span>
+        <span class="result-badge rb-green">EPS: +62% ⚡</span>
+        <span class="result-badge rb-green">Rev: +31%</span>
+        <span class="result-meta">Conf: 79 · Industrials</span>
+      </div>
+      <div class="result-row">
+        <span class="result-ticker">META</span>
+        <span class="result-badge rb-orange">📋 TECH ONLY</span>
+        <span class="result-badge rb-blue">RS: 82</span>
+        <span class="result-meta">EPS data missing</span>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--text3)">⚡ = EPS growth accelerating. "FULL" = passed both technical + fundamental layers. "TECH ONLY" = technical passed but fundamental did not.</p>
+  </div>
+</div>
+
+<!-- ═══ STEP 1: PYTHON ═══ -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--blue-d);color:var(--blue)">1</div>
+    <div class="step-header-text">
+      <h2>Install Python</h2>
+      <p>Python is the programming language the screener is written in. Think of it as the engine.</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <div class="callout note">
+      <span class="callout-icon">💡</span>
+      <div>If you already have Python 3.9 or newer, skip to Step 2. To check, open your terminal and type <code>python --version</code> or <code>python3 --version</code>.</div>
+    </div>
+
+    <div class="os-tabs">
+      <div class="os-tab active" onclick="switchTab(this,'win')">🪟 Windows</div>
+      <div class="os-tab" onclick="switchTab(this,'mac')">🍎 Mac</div>
+      <div class="os-tab" onclick="switchTab(this,'linux')">🐧 Linux</div>
+    </div>
+
+    <div class="os-panel active" id="win">
+      <div class="os-panel-inner">
+        <ol>
+          <li>Go to <strong>python.org/downloads</strong> in your browser</li>
+          <li>Click the big yellow <strong>"Download Python 3.xx"</strong> button</li>
+          <li>Open the downloaded <code>.exe</code> file</li>
+          <li><strong>Very important:</strong> Check the box that says <strong>"Add Python to PATH"</strong> at the bottom of the installer before clicking Install</li>
+          <li>Click <strong>Install Now</strong> and wait for it to finish</li>
+          <li>Open <strong>Command Prompt</strong> (press Windows key, type <code>cmd</code>, press Enter) and run:</li>
+        </ol>
+        <div class="code-label">Verify installation</div>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>python --version</code></div>
+        <p>You should see something like <code>Python 3.12.2</code>. If yes, Python is ready! ✅</p>
+      </div>
+    </div>
+
+    <div class="os-panel" id="mac">
+      <div class="os-panel-inner">
+        <ol>
+          <li>Open <strong>Terminal</strong> (press Cmd+Space, type "Terminal", press Enter)</li>
+          <li>The easiest way is to install via Homebrew. First, install Homebrew if you don't have it:</li>
+        </ol>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></div>
+        <ol start="3">
+          <li>Then install Python:</li>
+        </ol>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>brew install python</code></div>
+        <ol start="4"><li>Verify:</li></ol>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>python3 --version</code></div>
+        <div class="callout note"><span class="callout-icon">💡</span><div>On Mac, use <code>python3</code> instead of <code>python</code> for all commands in this guide.</div></div>
+      </div>
+    </div>
+
+    <div class="os-panel" id="linux">
+      <div class="os-panel-inner">
+        <p>Python 3 is usually pre-installed. Check first:</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>python3 --version</code></div>
+        <p>If not installed (Ubuntu/Debian):</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>sudo apt update && sudo apt install python3 python3-pip -y</code></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STEP 2: FOLDER ═══ -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--green-d);color:var(--green)">2</div>
+    <div class="step-header-text">
+      <h2>Create your screener folder</h2>
+      <p>Put all the files in one place so Python can find them</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <p>Create a folder on your computer called <code>sepa_screener</code>. You can do this the normal way
+    (right-click → New Folder) or via terminal. Then copy the three files from this package into it:</p>
+
+    <div class="filetree">
+<span class="dir">📁 sepa_screener/</span>
+├── <span class="file">screener.py</span>          <span class="note">← the main program</span>
+├── <span class="file">requirements.txt</span>     <span class="note">← list of packages to install</span>
+└── <span class="file">.env</span>                 <span class="note">← your private settings (you create this next)</span>
+    </div>
+
+    <div class="callout tip">
+      <span class="callout-icon">✅</span>
+      <div>The <code>.env</code> file does not exist yet — you'll create it in Step 4. For now just copy <code>screener.py</code> and <code>requirements.txt</code> into the folder.</div>
+    </div>
+
+    <p>Now open your terminal <strong>inside that folder</strong>. The easiest ways:</p>
+    <ul>
+      <li><strong>Windows:</strong> Hold Shift, right-click inside the folder → "Open PowerShell window here" (or Command Prompt)</li>
+      <li><strong>Mac:</strong> In Finder, right-click the folder → Services → "New Terminal at Folder"</li>
+      <li><strong>Any OS:</strong> Open terminal, then type <code>cd</code> followed by the path to your folder:</li>
+    </ul>
+    <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>cd C:\Users\YourName\sepa_screener      # Windows example
+cd /Users/YourName/sepa_screener        # Mac/Linux example</code></div>
+  </div>
+</div>
+
+<!-- ═══ STEP 3: PACKAGES ═══ -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--orange-d);color:var(--orange)">3</div>
+    <div class="step-header-text">
+      <h2>Install the required packages</h2>
+      <p>These are free libraries that add stock-fetching and data-processing abilities to Python</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <p>Think of packages like apps on your phone — they add extra features. This screener needs a few:</p>
+    <ul>
+      <li><strong>yfinance</strong> — downloads stock price and financial data from Yahoo Finance (free)</li>
+      <li><strong>pandas</strong> — works with tables of data (like Excel but in code)</li>
+      <li><strong>numpy</strong> — fast math operations (moving averages, etc.)</li>
+      <li><strong>requests</strong> — fetches data from the internet</li>
+      <li><strong>python-dotenv</strong> — reads your settings from the <code>.env</code> file safely</li>
+    </ul>
+
+    <p>With your terminal open inside the <code>sepa_screener</code> folder, run this single command:</p>
+    <div class="code-label">Install everything at once</div>
+    <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>pip install -r requirements.txt</code></div>
+
+    <div class="callout note">
+      <span class="callout-icon">💡</span>
+      <div>On Mac/Linux, you may need to use <code>pip3</code> instead of <code>pip</code>. If you get a "command not found" error, try <code>python -m pip install -r requirements.txt</code></div>
+    </div>
+
+    <p>You'll see a bunch of text scrolling by — that's normal. It's downloading and installing. When it finishes and you see your terminal prompt again, you're done. ✅</p>
+
+    <div class="callout tip">
+      <span class="callout-icon">✅</span>
+      <div><strong>Optional but recommended — use a virtual environment:</strong> This keeps the screener's packages separate from other Python projects. Run <code>python -m venv venv</code>, then activate it with <code>venv\Scripts\activate</code> (Windows) or <code>source venv/bin/activate</code> (Mac/Linux), then run the pip install command above.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STEP 4: KEYS ═══ -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--purple-d);color:var(--purple)">4</div>
+    <div class="step-header-text">
+      <h2>Set up your credentials</h2>
+      <p>The screener needs a way to email you and (optionally) message you on Telegram</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <p>Create a file called exactly <code>.env</code> (note the dot at the start) inside your <code>sepa_screener</code> folder.
+    Open it with any text editor (Notepad on Windows, TextEdit on Mac). Copy and paste this template:</p>
+
+    <div class="code-label">Contents of your .env file</div>
+    <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>EMAIL_SENDER=your_gmail@gmail.com
+EMAIL_PASSWORD=xxxx xxxx xxxx xxxx
+EMAIL_TO=your_gmail@gmail.com
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=</code></div>
+
+    <h3>📧 Setting up Gmail (required for email reports)</h3>
+    <p>You need a <strong>Gmail App Password</strong> — this is a special 16-character code that lets
+    the screener send emails on your behalf, without using your real Gmail password.
+    It only works if you have 2-Step Verification turned on in Gmail.</p>
+
+    <div class="checklist">
+      <div class="check-item">
+        <div class="check-box" style="background:var(--green-d);color:var(--green)">1</div>
+        <div class="check-text">
+          <strong>Go to your Google Account settings</strong>
+          Visit <a href="https://myaccount.google.com" style="color:#60a5fa">myaccount.google.com</a> and click <strong>Security</strong> in the left sidebar
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" style="background:var(--green-d);color:var(--green)">2</div>
+        <div class="check-text">
+          <strong>Turn on 2-Step Verification if it's off</strong>
+          Under "How you sign in to Google", click 2-Step Verification and follow the steps. You need this on before you can create an App Password.
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" style="background:var(--green-d);color:var(--green)">3</div>
+        <div class="check-text">
+          <strong>Create an App Password</strong>
+          Go back to Security → scroll down → click <strong>"App passwords"</strong>. Type "SEPA Screener" in the name box → click <strong>Create</strong>. Google will show you a 16-character code like <code>abcd efgh ijkl mnop</code>. Copy it immediately — you can only see it once.
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" style="background:var(--green-d);color:var(--green)">4</div>
+        <div class="check-text">
+          <strong>Paste it into your .env file</strong>
+          Replace <code>xxxx xxxx xxxx xxxx</code> with your App Password (spaces are fine). Also replace <code>your_gmail@gmail.com</code> with your actual Gmail address in both the SENDER and TO fields.
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>📱 Setting up Telegram (optional — for instant messages)</h3>
+    <p>If you want a quick Telegram message when the screener runs, follow these steps. If you just want email, leave TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID blank.</p>
+
+    <div class="checklist">
+      <div class="check-item">
+        <div class="check-box" style="background:var(--blue-d);color:var(--blue)">1</div>
+        <div class="check-text">
+          <strong>Create a Telegram Bot</strong>
+          Open Telegram and search for <code>@BotFather</code>. Send it the message <code>/newbot</code>. It will ask for a name (e.g. "My Screener") and a username (must end in "bot", e.g. "myscreener_bot"). It will then give you a token that looks like <code>123456789:ABCdef...</code> — copy it.
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" style="background:var(--blue-d);color:var(--blue)">2</div>
+        <div class="check-text">
+          <strong>Get your Chat ID</strong>
+          Search for <code>@userinfobot</code> in Telegram. Send it any message (like "hi"). It will reply with your ID number, like <code>123456789</code>. Copy that number.
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" style="background:var(--blue-d);color:var(--blue)">3</div>
+        <div class="check-text">
+          <strong>Paste both into your .env file</strong>
+          Put the bot token after <code>TELEGRAM_BOT_TOKEN=</code> and your chat ID after <code>TELEGRAM_CHAT_ID=</code>. Also send a message to your own bot in Telegram first (just open the chat and press Start) so it can message you.
+        </div>
+      </div>
+    </div>
+
+    <div class="callout danger">
+      <span class="callout-icon">🔒</span>
+      <div><strong>Keep your .env file private.</strong> Never upload it to GitHub, share it in a chat, or show it to anyone. It contains your Gmail App Password. If you accidentally share it, immediately go to Google Account → Security → App Passwords and delete that app password, then create a new one.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STEP 5: TEST RUN ═══ -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--green-d);color:var(--green)">5</div>
+    <div class="step-header-text">
+      <h2>Do a test run</h2>
+      <p>Run the screener on a small batch first to make sure everything works</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <p>Before running it on all 6,000+ stocks (which takes 30–60 minutes), do a quick test
+    on just 200 stocks. Open your <code>.env</code> file and temporarily add this line:</p>
+
+    <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>MAX_TICKERS=200</code></div>
+
+    <p>This tells the screener to only look at the first 200 stocks in the alphabet — great for testing.
+    Save the <code>.env</code> file. Now run the screener:</p>
+
+    <div class="os-tabs">
+      <div class="os-tab active" onclick="switchTab(this,'run-win')">🪟 Windows</div>
+      <div class="os-tab" onclick="switchTab(this,'run-mac')">🍎 Mac / Linux</div>
+    </div>
+    <div class="os-panel active" id="run-win">
+      <div class="os-panel-inner">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>python screener.py</code></div>
+      </div>
+    </div>
+    <div class="os-panel" id="run-mac">
+      <div class="os-panel-inner">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>python3 screener.py</code></div>
+      </div>
+    </div>
+
+    <p>You will see output scrolling in the terminal. Here's what a healthy run looks like:</p>
+    <div class="code-block"><code><span class="cm">2024-01-15  INFO     ============================================================
+2024-01-15  INFO       SEPA Screener v2.0 — 2024-01-15
+2024-01-15  INFO     ============================================================
+2024-01-15  INFO     Trying NASDAQ HTTPS API...
+2024-01-15  INFO     ✅ NASDAQ API: 5842 tickers
+2024-01-15  INFO     Limited to 200 tickers for testing
+2024-01-15  INFO     Ticker universe ready: 200 stocks
+2024-01-15  INFO     Downloading price history for 200 stocks...
+2024-01-15  INFO       Batch 1/2: A … BZ
+2024-01-15  INFO       Batch 2/2: C … DZ
+2024-01-15  INFO     Got usable history for 186 stocks
+2024-01-15  INFO     Applying liquidity filters (price + volume)...
+2024-01-15  INFO       After liquidity filter: 142 stocks remain
+2024-01-15  INFO     Computing technical indicators...
+2024-01-15  INFO     Computing RS ranks...
+2024-01-15  INFO     Applying Trend Template (Layer 1 — Technical)...
+2024-01-15  INFO       Passed all 8 Trend Template criteria: <span class="cn">18</span> stocks
+2024-01-15  INFO       Close calls (7/8 criteria): <span class="cn">11</span> stocks
+2024-01-15  INFO     Fetching fundamental data for 18 technical qualifiers...
+2024-01-15  INFO       [1/18] AAPL — fetching fundamentals
+...
+2024-01-15  INFO     ✅ HTML dashboard saved: sepa_report_20240115.html
+2024-01-15  INFO     ✅ Telegram sent
+2024-01-15  INFO     ✅ Email sent
+2024-01-15  INFO     ✅ All done.</span></code></div>
+
+    <p>When it finishes, open the HTML file that was created in your folder (e.g. <code>sepa_report_20240115.html</code>) — just double-click it and it opens in your browser. You should also have received an email.</p>
+
+    <div class="callout tip">
+      <span class="callout-icon">✅</span>
+      <div><strong>Test run worked?</strong> Go back to your <code>.env</code> file and <strong>delete or comment out</strong> the <code>MAX_TICKERS=200</code> line (put a <code>#</code> in front of it). The next run will scan all stocks.</div>
+    </div>
+
+    <h3>Common errors and fixes</h3>
+    <div class="checklist">
+      <div class="check-item">
+        <div class="check-box" style="background:var(--red-d);color:var(--red)">!</div>
+        <div class="check-text">
+          <strong>"ModuleNotFoundError: No module named 'yfinance'"</strong>
+          You didn't install the packages yet. Run <code>pip install -r requirements.txt</code> first.
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" style="background:var(--red-d);color:var(--red)">!</div>
+        <div class="check-text">
+          <strong>"SMTPAuthenticationError" when sending email</strong>
+          Your Gmail App Password is wrong or you used your regular password. Double-check Step 4.
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" style="background:var(--red-d);color:var(--red)">!</div>
+        <div class="check-text">
+          <strong>"python is not recognized as a command" (Windows)</strong>
+          Python wasn't added to PATH. Re-install Python and make sure to check "Add Python to PATH".
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" style="background:var(--red-d);color:var(--red)">!</div>
+        <div class="check-text">
+          <strong>Screener runs but sends 0 qualifiers</strong>
+          That's valid — it means no stocks meet all criteria on that day. The market breadth could be low. Try running on a different day, or check the "Close Calls" section in the email/HTML report.
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" style="background:var(--red-d);color:var(--red)">!</div>
+        <div class="check-text">
+          <strong>Very slow / hangs on "Downloading price history"</strong>
+          Normal — downloading 2 years of data for 6,000 stocks takes time. A full run takes 30–60 minutes depending on your internet speed. Don't close the terminal window.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STEP 6: FULL RUN ═══ -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--blue-d);color:var(--blue)">6</div>
+    <div class="step-header-text">
+      <h2>Run the full screener</h2>
+      <p>Scan all ~6,000 US stocks — typically takes 30–60 minutes</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <p>With <code>MAX_TICKERS</code> removed from your <code>.env</code> (or set to <code>0</code>),
+    run the same command as before:</p>
+
+    <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>python screener.py     # Windows
+python3 screener.py    # Mac / Linux</code></div>
+
+    <p>You can minimize the terminal window — it will keep running in the background. Don't turn off your computer until it finishes. When complete:</p>
+    <ul>
+      <li>An <strong>HTML report</strong> is saved in your folder — open it in any browser</li>
+      <li>An <strong>email</strong> is sent to your Gmail</li>
+      <li>A <strong>Telegram message</strong> is sent (if configured)</li>
+      <li>A <strong>screener.log</strong> file records everything that happened</li>
+    </ul>
+
+    <div class="callout note">
+      <span class="callout-icon">💡</span>
+      <div><strong>Best time to run:</strong> After 5:00 PM Eastern Time (US markets close at 4:00 PM ET, and data takes ~30 min to fully populate). If you run at 6 PM or later, you'll have complete end-of-day data for all stocks.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STEP 7: AUTOMATE ═══ -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--orange-d);color:var(--orange)">7</div>
+    <div class="step-header-text">
+      <h2>Automate it — run every weekday automatically</h2>
+      <p>Set it and forget it. The screener runs itself every evening.</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <p>You can make the screener run automatically every weekday evening using your operating system's built-in scheduler. No extra software needed.</p>
+
+    <!-- WINDOWS -->
+    <div class="os-tabs">
+      <div class="os-tab active" onclick="switchTab(this,'sched-win')">🪟 Windows Task Scheduler</div>
+      <div class="os-tab" onclick="switchTab(this,'sched-mac')">🍎 Mac cron</div>
+      <div class="os-tab" onclick="switchTab(this,'sched-linux')">🐧 Linux cron</div>
+    </div>
+
+    <div class="os-panel active" id="sched-win">
+      <div class="os-panel-inner">
+        <ol>
+          <li>Press Windows key, search for <strong>Task Scheduler</strong>, open it</li>
+          <li>In the right panel, click <strong>Create Basic Task</strong></li>
+          <li>Name: <code>SEPA Screener</code> → click Next</li>
+          <li>Trigger: select <strong>Daily</strong> → click Next</li>
+          <li>Start time: <strong>6:00 PM</strong>, recur every <strong>1</strong> day → click Next</li>
+          <li>Action: select <strong>Start a program</strong> → click Next</li>
+          <li>Program/script: Browse to your Python executable. Usually: <code>C:\Users\YourName\AppData\Local\Programs\Python\Python312\python.exe</code></li>
+          <li>Add arguments: <code>screener.py</code></li>
+          <li>Start in: your screener folder path, e.g. <code>C:\Users\YourName\sepa_screener</code></li>
+          <li>Click Next → Finish</li>
+        </ol>
+        <p>To run only on weekdays, after creating the task: right-click it → Properties → Triggers tab → Edit → Advanced settings → check "Stop task if it runs longer than" → also go to Conditions tab and check settings. Alternatively, add a check inside the script (already handled — the screener runs any day but markets are only open Mon–Fri, so weekday results will differ from weekend runs).</p>
+        <div class="callout tip"><span class="callout-icon">✅</span><div>To test your scheduled task, right-click it in Task Scheduler → <strong>Run</strong>. The screener should start.</div></div>
+      </div>
+    </div>
+
+    <div class="os-panel" id="sched-mac">
+      <div class="os-panel-inner">
+        <p>Open Terminal and edit your cron schedule:</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>crontab -e</code></div>
+        <p>This opens a text editor. Press <code>i</code> to enter insert mode, then add this line (replacing the path with your actual folder path):</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>0 18 * * 1-5 cd /Users/YourName/sepa_screener && python3 screener.py >> screener.log 2>&1</code></div>
+        <p>This means: <strong>at 6:00 PM, Monday through Friday</strong>, go into the screener folder and run the screener. Press <code>Esc</code>, then type <code>:wq</code> and press Enter to save.</p>
+        <div class="callout warn"><span class="callout-icon">⚠️</span><div>Your Mac must be awake at 6 PM for the cron job to run. If your Mac sleeps, go to System Settings → Battery → uncheck "Enable Power Nap" and consider keeping the lid open or plugged in at that time.</div></div>
+      </div>
+    </div>
+
+    <div class="os-panel" id="sched-linux">
+      <div class="os-panel-inner">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>crontab -e</code></div>
+        <p>Add this line (replace the path):</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>0 18 * * 1-5 cd /home/yourname/sepa_screener && python3 screener.py >> screener.log 2>&1</code></div>
+        <p>If running on a server (VPS), it will run even while your own computer is off — ideal for always-on operation.</p>
+        <div class="callout tip"><span class="callout-icon">✅</span><div>Running on a $5/month VPS (like DigitalOcean, Vultr, or Oracle Cloud Free Tier) is the most reliable approach. The server is always on, always running. Oracle Cloud has a permanently free VPS tier.</div></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>📅 Typical schedule of events</h3>
+    <div class="schedule-card">
+      <div class="sched-row"><span class="sched-time">4:00 PM ET</span><span class="sched-desc">US market closes for the day</span></div>
+      <div class="sched-row"><span class="sched-time">4:30 PM ET</span><span class="sched-desc">Closing prices fully populated on Yahoo Finance</span></div>
+      <div class="sched-row"><span class="sched-time">6:00 PM ET</span><span class="sched-desc">Screener starts automatically ← your scheduled time</span></div>
+      <div class="sched-row"><span class="sched-time">6:30–7:00 PM</span><span class="sched-desc">Screener finishes scanning all ~6,000 stocks</span></div>
+      <div class="sched-row"><span class="sched-time">7:00 PM ET</span><span class="sched-desc">Email arrives in your inbox + Telegram message</span></div>
+      <div class="sched-row"><span class="sched-time">~7:05 PM ET</span><span class="sched-desc">Open the HTML report, review the results ☕</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STEP 8: UNDERSTAND THE OUTPUT ═══ -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--purple-d);color:var(--purple)">8</div>
+    <div class="step-header-text">
+      <h2>Understanding the output</h2>
+      <p>What each column means in plain English</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <table style="width:100%;border-collapse:collapse;font-size:12.5px">
+      <thead>
+        <tr>
+          <th style="padding:9px 12px;background:#161a22;color:#64748b;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;border-bottom:1px solid #1e2433">Column</th>
+          <th style="padding:9px 12px;background:#161a22;color:#64748b;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;border-bottom:1px solid #1e2433">What it means</th>
+          <th style="padding:9px 12px;background:#161a22;color:#64748b;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;border-bottom:1px solid #1e2433">What's good?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#e2e8f0;font-weight:700">Confidence</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">A 0–100 score based on how strongly the stock meets the optional criteria. Higher = more criteria met = stronger candidate on paper.</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#10b981">70+ is strong</td></tr>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#e2e8f0;font-weight:700">RS Rank</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">Relative Strength rank vs. all other US stocks. 90 means the stock has outperformed 90% of all other US stocks over the past 12 months.</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#10b981">80+ is strong; 90+ is elite</td></tr>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#e2e8f0;font-weight:700">EPS Growth Q</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">How much the company's earnings grew vs. the same quarter last year. ⚡ means the growth rate is accelerating (getting bigger each quarter).</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#10b981">20%+ required; 50%+ is excellent</td></tr>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#e2e8f0;font-weight:700">Rev Growth Q</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">How much the company's sales revenue grew vs. the same quarter last year. Revenue growth confirms that earnings aren't just from cost-cutting.</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#10b981">15%+ required; 30%+ is strong</td></tr>
+        <tr><td style="padding:9px 12px;color:#e2e8f0;font-weight:700">FULL vs TECH ONLY</td><td style="padding:9px 12px;color:#94a3b8">FULL = passed both technical AND fundamental criteria. TECH ONLY = passed the 8 Trend Template criteria but fundamental data was missing or did not meet thresholds.</td><td style="padding:9px 12px;color:#10b981">Focus on FULL qualifiers first</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout note">
+      <span class="callout-icon">💡</span>
+      <div><strong>What to do with the list:</strong> The report is a <em>starting point</em>, not a shopping list. When you see a stock you don't recognise, look it up. Read what the company does, look at its chart, understand why it's growing. Never buy something just because it appeared in a screen.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STEP 9: CUSTOMISE ═══ -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--green-d);color:var(--green)">9</div>
+    <div class="step-header-text">
+      <h2>Customise the thresholds (optional)</h2>
+      <p>Adjust how strict the screening is by editing your .env file</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <p>The defaults are based on the methodology as described, but you may want to adjust them.
+    All of these go in your <code>.env</code> file:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:12.5px">
+      <thead>
+        <tr>
+          <th style="padding:9px 12px;background:#161a22;color:#64748b;font-size:10px;text-transform:uppercase;text-align:left;border-bottom:1px solid #1e2433">Setting</th>
+          <th style="padding:9px 12px;background:#161a22;color:#64748b;font-size:10px;text-transform:uppercase;text-align:left;border-bottom:1px solid #1e2433">Default</th>
+          <th style="padding:9px 12px;background:#161a22;color:#64748b;font-size:10px;text-transform:uppercase;text-align:left;border-bottom:1px solid #1e2433">What it does</th>
+          <th style="padding:9px 12px;background:#161a22;color:#64748b;font-size:10px;text-transform:uppercase;text-align:left;border-bottom:1px solid #1e2433">Raise it to...</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #161a22;font-family:monospace;font-size:11.5px;color:#a8d8b9">EPS_GROWTH_MIN</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">20</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">Min quarterly EPS growth %</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">25–50 for stricter filtering, fewer results</td></tr>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #161a22;font-family:monospace;font-size:11.5px;color:#a8d8b9">REV_GROWTH_MIN</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">15</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">Min quarterly revenue growth %</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">20–30 for higher-growth-only results</td></tr>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #161a22;font-family:monospace;font-size:11.5px;color:#a8d8b9">RS_RANK_MIN</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">70</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">Min RS percentile rank</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">80 or 85 to focus on top leaders only</td></tr>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #161a22;font-family:monospace;font-size:11.5px;color:#a8d8b9">PCT_FROM_52WH</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">25</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">Must be within X% of 52-week high</td><td style="padding:9px 12px;border-bottom:1px solid #161a22;color:#94a3b8">15 for stocks very close to breaking out</td></tr>
+        <tr><td style="padding:9px 12px;font-family:monospace;font-size:11.5px;color:#a8d8b9">MIN_AVG_VOL</td><td style="padding:9px 12px;color:#94a3b8">100000</td><td style="padding:9px 12px;color:#94a3b8">Minimum daily volume (shares)</td><td style="padding:9px 12px;color:#94a3b8">500000 to focus on more liquid, larger stocks</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div><strong>More results ≠ better results.</strong> Lowering thresholds gives you more stocks but dilutes quality. Start with the defaults, run the screener for a few weeks, and adjust based on your own judgment after seeing real results.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CHECKLIST -->
+<div class="step">
+  <div class="step-header">
+    <div class="step-num" style="background:var(--green-d);color:var(--green)">✓</div>
+    <div class="step-header-text">
+      <h2>Final checklist — are you ready?</h2>
+      <p>Tick these off before your first full run</p>
+    </div>
+  </div>
+  <div class="step-body">
+    <div class="checklist">
+      <div class="check-item"><div class="check-box">□</div><div class="check-text"><strong>Python 3.9+ installed</strong><br>Verified with <code>python --version</code></div></div>
+      <div class="check-item"><div class="check-box">□</div><div class="check-text"><strong>Files in place</strong><br><code>screener.py</code> and <code>requirements.txt</code> are in your <code>sepa_screener</code> folder</div></div>
+      <div class="check-item"><div class="check-box">□</div><div class="check-text"><strong>Packages installed</strong><br>Ran <code>pip install -r requirements.txt</code> without errors</div></div>
+      <div class="check-item"><div class="check-box">□</div><div class="check-text"><strong>.env file created</strong><br>With your real Gmail address and App Password</div></div>
+      <div class="check-item"><div class="check-box">□</div><div class="check-text"><strong>Test run succeeded</strong><br>Ran with <code>MAX_TICKERS=200</code>, received email report</div></div>
+      <div class="check-item"><div class="check-box">□</div><div class="check-text"><strong>MAX_TICKERS removed</strong><br>Deleted or commented out from <code>.env</code> for full runs</div></div>
+      <div class="check-item"><div class="check-box">□</div><div class="check-text"><strong>Scheduler configured</strong><br>Task Scheduler / cron set to run at 6 PM on weekdays</div></div>
+    </div>
+
+    <div class="callout tip" style="margin-top:16px">
+      <span class="callout-icon">🎉</span>
+      <div><strong>You're all set.</strong> The screener will now run every weekday evening, scan the entire US market, apply both the technical and fundamental qualification layers, and deliver a clean report to your inbox. Remember: this is a screening tool — always do your own research before making any investment decision.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function switchTab(el, id) {
+  const group = el.parentElement;
+  group.querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  let panel = el.closest('.step-body') || document.body;
+  panel.querySelectorAll('.os-panel').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+}
+
+function copyCode(btn) {
+  const code = btn.nextElementSibling.textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    btn.style.color = '#10b981';
+    setTimeout(() => { btn.textContent = 'Copy'; btn.style.color = ''; }, 1500);
+  });
+}
+</script>
+</body>
+</html>

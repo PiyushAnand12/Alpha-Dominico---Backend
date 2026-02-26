@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SEPA Qualification Engine — Full SaaS Technical Specification</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #0b0d11;
+  --surface: #111318;
+  --surface2: #161a22;
+  --border: #1e2433;
+  --border2: #252d3d;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #475569;
+  --green: #10b981;
+  --green-dim: rgba(16,185,129,0.12);
+  --blue: #3b82f6;
+  --blue-dim: rgba(59,130,246,0.12);
+  --orange: #f59e0b;
+  --orange-dim: rgba(245,158,11,0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.12);
+  --purple: #a855f7;
+  --purple-dim: rgba(168,85,247,0.12);
+  --teal: #06b6d4;
+  --teal-dim: rgba(6,182,212,0.12);
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* ─── Layout ─── */
+.layout { display: flex; min-height: 100vh; }
+
+nav {
+  width: 260px; flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto; padding: 0;
+  display: flex; flex-direction: column;
+}
+
+.nav-brand {
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, #0f1823, #111318);
+}
+.nav-brand-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: linear-gradient(135deg, #10b981, #0d9488);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 16px; color: #fff;
+  margin-bottom: 10px;
+}
+.nav-brand h1 { font-size: 12px; font-weight: 700; color: #e2e8f0; line-height: 1.3; }
+.nav-brand p { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+.nav-section { padding: 14px 0 4px; }
+.nav-section-label {
+  font-size: 9px; color: var(--text3);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0 18px; margin-bottom: 4px; font-weight: 600;
+}
+nav a {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 18px; font-size: 12px; font-weight: 500;
+  color: var(--text2); text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.12s;
+}
+nav a:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+nav a.active { color: var(--green); border-left-color: var(--green); background: var(--green-dim); }
+.nav-num {
+  width: 18px; height: 18px; border-radius: 4px;
+  background: var(--surface2); color: var(--text3);
+  font-size: 9px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+nav a.active .nav-num { background: var(--green); color: #fff; }
+
+main {
+  flex: 1; padding: 48px 56px;
+  max-width: 1080px;
+  overflow-x: hidden;
+}
+
+/* ─── Hero ─── */
+.hero {
+  background: linear-gradient(135deg, #0d1f2d 0%, #111827 40%, #0b0d11 100%);
+  border: 1px solid var(--border2);
+  border-radius: 16px; padding: 40px;
+  margin-bottom: 52px;
+}
+.hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  border-radius: 20px; padding: 3px 11px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+}
+.tag-green { background: var(--green-dim); color: #34d399; border: 1px solid rgba(16,185,129,0.2); }
+.tag-blue  { background: var(--blue-dim);  color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+.tag-orange{ background: var(--orange-dim);color: #fbbf24; border: 1px solid rgba(245,158,11,0.2); }
+.tag-purple{ background: var(--purple-dim);color: #c084fc; border: 1px solid rgba(168,85,247,0.2); }
+
+.hero h1 { font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+.hero h1 span { color: var(--green); }
+.hero p { color: var(--text2); font-size: 14px; max-width: 640px; line-height: 1.8; margin-bottom: 24px; }
+
+.hero-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 16px; }
+.hero-card {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px;
+}
+.hero-card .hc-label { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+.hero-card .hc-val { font-size: 20px; font-weight: 800; }
+.hero-card .hc-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+/* ─── Sections ─── */
+section { margin-bottom: 64px; scroll-margin-top: 24px; }
+
+.section-head {
+  display: flex; align-items: flex-start; gap: 16px;
+  margin-bottom: 28px; padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.section-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.section-head-text h2 { font-size: 20px; font-weight: 800; margin-bottom: 3px; }
+.section-head-text p { font-size: 12px; color: var(--text2); }
+
+/* ─── Rule tables ─── */
+.rule-table {
+  width: 100%; border-collapse: collapse;
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  margin-bottom: 20px; font-size: 13px;
+}
+.rule-table thead tr { background: var(--surface2); }
+.rule-table th {
+  padding: 10px 14px; text-align: left;
+  font-size: 10px; font-weight: 700; color: var(--text3);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  border-bottom: 1px solid var(--border2);
+}
+.rule-table td {
+  padding: 11px 14px; border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.rule-table tr:last-child td { border-bottom: none; }
+.rule-table tr:hover td { background: rgba(255,255,255,0.015); }
+
+.rule-id {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  background: var(--surface2); border: 1px solid var(--border2);
+  padding: 2px 7px; border-radius: 4px;
+  color: var(--text2); white-space: nowrap;
+}
+
+.badge {
+  display: inline-flex; align-items: center;
+  border-radius: 4px; padding: 2px 7px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.badge-mandatory { background: var(--red-dim); color: #f87171; }
+.badge-optional  { background: var(--blue-dim); color: #60a5fa; }
+.badge-context   { background: var(--orange-dim); color: #fbbf24; }
+.badge-pro       { background: var(--purple-dim); color: #c084fc; }
+
+/* ─── Code blocks ─── */
+.code-wrap { margin: 12px 0; }
+.code-label { font-size: 10px; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; font-weight: 600; }
+.code-block {
+  background: #060809; border: 1px solid var(--border);
+  border-radius: 8px; padding: 16px 18px;
+  overflow-x: auto;
+}
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px; color: #a8d8b9;
+  display: block; white-space: pre; line-height: 1.65;
+}
+.cm  { color: #4a5568; }   /* comment */
+.ck  { color: #7ee8a2; }   /* keyword */
+.cs  { color: #fbd38d; }   /* string */
+.cn  { color: #fc8181; }   /* number */
+.cc  { color: #90cdf4; }   /* class */
+
+p code, li code, td code {
+  display: inline;
+  background: var(--surface2); color: #a8d8b9;
+  border: 1px solid var(--border2);
+  border-radius: 4px; padding: 1px 5px;
+  font-size: 11.5px;
+}
+
+/* ─── Callouts ─── */
+.callout {
+  border-radius: 8px; padding: 12px 16px;
+  margin: 12px 0; font-size: 13px; line-height: 1.65;
+  display: flex; gap: 10px;
+  border-left: 3px solid;
+}
+.callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.note  { background: var(--blue-dim);   border-color: var(--blue);   color: #93c5fd; }
+.warn  { background: var(--orange-dim); border-color: var(--orange);  color: #fcd34d; }
+.good  { background: var(--green-dim);  border-color: var(--green);   color: #6ee7b7; }
+.risk  { background: var(--red-dim);    border-color: var(--red);     color: #fca5a5; }
+
+/* ─── Schema boxes ─── */
+.schema-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; margin-bottom: 16px; overflow: hidden;
+}
+.schema-card-header {
+  background: var(--surface2); padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.schema-table-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 700; color: var(--green);
+}
+.schema-card-body { padding: 4px 0; }
+.schema-row {
+  display: grid; grid-template-columns: 160px 120px 1fr;
+  gap: 0; padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12.5px;
+  align-items: start;
+}
+.schema-row:last-child { border-bottom: none; }
+.schema-col { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--green); }
+.schema-type { color: #fbbf24; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.schema-desc { color: var(--text2); font-size: 11.5px; line-height: 1.5; }
+
+/* ─── Arch boxes ─── */
+.arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.arch-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px;
+}
+.arch-card-head {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 12px;
+}
+.arch-card-icon { font-size: 18px; }
+.arch-card-title { font-size: 13px; font-weight: 700; }
+.arch-card ul { padding-left: 16px; }
+.arch-card li { font-size: 12.5px; color: var(--text2); margin-bottom: 5px; }
+.arch-card li strong { color: var(--text); }
+
+/* ─── Flow diagram ─── */
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  margin-bottom: 20px;
+}
+.flow-step {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.flow-step:last-child { border-bottom: none; }
+.flow-step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  flex-shrink: 0; margin-top: 1px;
+}
+.flow-step-body h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.flow-step-body p { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+/* ─── Tier grid ─── */
+.tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.tier-card {
+  border-radius: 12px; padding: 22px;
+  border: 1px solid;
+}
+.tier-basic { background: var(--surface); border-color: var(--border2); }
+.tier-pro   { background: var(--green-dim); border-color: rgba(16,185,129,0.3); }
+.tier-name { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+.tier-price { font-size: 12px; color: var(--text2); margin-bottom: 14px; }
+.tier-feature {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 6px 0; font-size: 12.5px;
+  border-bottom: 1px solid var(--border);
+}
+.tier-feature:last-child { border-bottom: none; }
+.tier-check { color: var(--green); font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+.tier-x     { color: var(--text3); font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+
+/* ─── Risk table ─── */
+.risk-matrix {
+  display: grid; grid-template-columns: 1fr 80px 80px 1fr;
+  gap: 0; border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; margin-bottom: 20px;
+}
+.risk-header {
+  background: var(--surface2); padding: 8px 12px;
+  font-size: 10px; font-weight: 700; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border2);
+}
+.risk-row-cell {
+  padding: 11px 12px; border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.risk-row-cell:last-child { border-right: none; }
+
+.impact-high { color: #f87171; font-weight: 700; font-size: 10px; }
+.impact-med  { color: #fbbf24; font-weight: 700; font-size: 10px; }
+.impact-low  { color: #34d399; font-weight: 700; font-size: 10px; }
+
+/* misc */
+.divider {
+  height: 1px; background: var(--border);
+  margin: 28px 0;
+}
+
+.inline-pill {
+  display: inline-flex; align-items: center;
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 4px; padding: 1px 7px;
+  font-size: 11px; font-weight: 600; color: var(--text2);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+p { margin-bottom: 10px; font-size: 13.5px; color: var(--text2); line-height: 1.75; }
+p strong { color: var(--text); }
+h3 { font-size: 15px; font-weight: 700; margin: 22px 0 10px; color: var(--text); }
+h4 { font-size: 13px; font-weight: 700; margin: 16px 0 8px; color: var(--text); }
+ul, ol { padding-left: 18px; margin: 8px 0 12px; }
+li { font-size: 13px; color: var(--text2); margin-bottom: 5px; line-height: 1.65; }
+li strong { color: var(--text); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+@media (max-width: 900px) {
+  nav { display: none; }
+  main { padding: 24px 16px; max-width: 100%; }
+  .hero-grid, .arch-grid, .tier-grid, .two-col { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-brand-icon">S</div>
+    <h1>SEPA Qualification<br>Engine — SaaS Spec</h1>
+    <p>v1.0 · Global Architecture</p>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Overview</div>
+    <a href="#intro">📋 Introduction</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Step 1 — Rules</div>
+    <a href="#tech-rules"><span class="nav-num">1</span> Technical Criteria</a>
+    <a href="#fund-rules"><span class="nav-num">2</span> Fundamental Criteria</a>
+    <a href="#rs-rules"><span class="nav-num">3</span> Relative Strength</a>
+    <a href="#vol-rules"><span class="nav-num">4</span> Volume Rules</a>
+    <a href="#base-rules"><span class="nav-num">5</span> Base Structure</a>
+    <a href="#risk-filters"><span class="nav-num">6</span> Risk Filters</a>
+    <a href="#rule-matrix"><span class="nav-num">7</span> Rule Matrix</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Step 2 — Architecture</div>
+    <a href="#data-sources"><span class="nav-num">8</span> Data Sources</a>
+    <a href="#db-schema"><span class="nav-num">9</span> Database Schema</a>
+    <a href="#backend"><span class="nav-num">10</span> Backend Architecture</a>
+    <a href="#engine"><span class="nav-num">11</span> Screening Engine</a>
+    <a href="#dashboard"><span class="nav-num">12</span> Dashboard</a>
+    <a href="#alerts"><span class="nav-num">13</span> Alert Engine</a>
+    <a href="#rbac"><span class="nav-num">14</span> Role-Based Access</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Step 3 — Risks</div>
+    <a href="#scalability"><span class="nav-num">15</span> Scalability Risks</a>
+    <a href="#integrity"><span class="nav-num">16</span> Data Integrity Risks</a>
+    <a href="#compliance"><span class="nav-num">17</span> Compliance</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<div class="hero">
+  <div class="hero-tags">
+    <span class="tag tag-green">📊 SEPA Methodology</span>
+    <span class="tag tag-blue">🌐 US + India Markets</span>
+    <span class="tag tag-orange">⚙️ SaaS Architecture</span>
+    <span class="tag tag-purple">🔒 Compliance-Aware</span>
+  </div>
+  <h1>SEPA Qualification Engine<br><span>Full SaaS Technical Specification</span></h1>
+  <p>A complete engineering blueprint for a two-market, two-layer stock screening platform
+     derived from systematic analysis of Minervini's published methodology. This document
+     covers extracted screening logic, database design, backend architecture, and all 11
+     deliverables. No investment advice is provided or implied.</p>
+  <div class="hero-grid">
+    <div class="hero-card">
+      <div class="hc-label">Screening Rules</div>
+      <div class="hc-val" style="color:var(--green)">38</div>
+      <div class="hc-sub">Quantified criteria</div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-label">Markets</div>
+      <div class="hc-val" style="color:var(--blue)">3</div>
+      <div class="hc-sub">US, NSE, BSE</div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-label">Layers</div>
+      <div class="hc-val" style="color:var(--orange)">2</div>
+      <div class="hc-sub">Technical + Fundamental</div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-label">DB Tables</div>
+      <div class="hc-val" style="color:var(--purple)">14</div>
+      <div class="hc-sub">Core schema objects</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ INTRO ═══════════════════════════ -->
+<section id="intro">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--blue-dim)">📋</div>
+    <div class="section-head-text">
+      <h2>Introduction & Scope</h2>
+      <p>Platform purpose, methodology basis, and output constraints</p>
+    </div>
+  </div>
+
+  <p>This specification defines the full technical upgrade of an existing US-only technical screener into a
+  globally-scalable SEPA-based qualification engine. The methodology extracted here is based on
+  structured analysis of principles described in Minervini's published works — not verbatim reproduction —
+  translated into programmatic, threshold-based conditions.</p>
+
+  <div class="callout note">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>Output Constraint (Non-Negotiable):</strong> The system output is limited to:
+    <em>"Currently meets SEPA-based qualification criteria."</em> The system must not produce buy signals,
+    entry prices, stop-loss levels, or price targets. All historical performance data is displayed as
+    aggregate statistics only, not as predictive guidance.</div>
+  </div>
+
+  <div class="callout good">
+    <span class="callout-icon">✅</span>
+    <div><strong>Methodology Note:</strong> Where the published methodology gives a range rather than
+    a single threshold (e.g., RS rank "80s or 90s"), this document adopts the minimum end of that range
+    as the programmable floor, with Pro users able to adjust upward. All thresholds are flagged clearly
+    as either explicitly stated in the source or as reasonable interpretations of stated principles.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ TECH RULES ═══════════════════════════ -->
+<section id="tech-rules">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--green-dim)">📈</div>
+    <div class="section-head-text">
+      <h2>Deliverable 1A — Technical Criteria (Trend Template)</h2>
+      <p>All 8 Trend Template conditions, converted to programmatic rules with thresholds</p>
+    </div>
+  </div>
+
+  <p>The Trend Template is the primary technical gate. A stock must satisfy <strong>all 8 conditions
+  simultaneously</strong> to enter Stage 2 qualification. Failure on any single criterion disqualifies
+  the candidate regardless of fundamental strength.</p>
+
+  <table class="rule-table">
+    <thead>
+      <tr>
+        <th style="width:72px">ID</th>
+        <th style="width:52px">Type</th>
+        <th>Rule Description</th>
+        <th>Programmatic Condition</th>
+        <th style="width:90px">Threshold</th>
+        <th>Fallback Logic</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rule-id">TT-01</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Price above both 150-day and 200-day simple moving average</td>
+        <td><code>price &gt; SMA150 AND price &gt; SMA200</code></td>
+        <td>0% margin</td>
+        <td>None. Hard gate.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">TT-02</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>150-day MA is above 200-day MA (MA alignment confirms uptrend hierarchy)</td>
+        <td><code>SMA150 &gt; SMA200</code></td>
+        <td>0% margin</td>
+        <td>None. Hard gate.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">TT-03</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>200-day MA has been trending upward for at least 1 month; 4–5 months preferred</td>
+        <td><code>SMA200_today &gt; SMA200_21daysago</code> (hard minimum)<br>
+            <code>SMA200_today &gt; SMA200_63daysago</code> (preferred tier)</td>
+        <td>21 trading days minimum; 63 preferred</td>
+        <td>If data insufficient, require at least 21-day positive slope. Flag as "early trend" if &lt; 63 days.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">TT-04</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>50-day MA is above both 150-day and 200-day MAs (full MA stacking)</td>
+        <td><code>SMA50 &gt; SMA150 AND SMA50 &gt; SMA200</code></td>
+        <td>0% margin</td>
+        <td>None. Hard gate.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">TT-05</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Current price is above the 50-day moving average</td>
+        <td><code>price &gt; SMA50</code></td>
+        <td>0% margin</td>
+        <td>None. Hard gate.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">TT-06</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Price is at least 30% above its 52-week low (confirms sustained upward momentum)</td>
+        <td><code>price &gt;= low_52w * 1.30</code></td>
+        <td>30% minimum. Best candidates often 100%+.</td>
+        <td>None. Hard gate. Explicitly stated.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">TT-07</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Price is within 25% of its 52-week high (stock must be near leadership territory)</td>
+        <td><code>price &gt;= high_52w * 0.75</code></td>
+        <td>Within 25% of 52-week high</td>
+        <td>None. Hard gate. Explicitly stated.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">TT-08</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Relative strength rank vs. benchmark is in the top 30% of all stocks (RS ≥ 70)</td>
+        <td>US: IBD-style RS rank ≥ 70<br>India: custom percentile vs NSE500 ≥ 70th percentile</td>
+        <td>RS ≥ 70 minimum; 80–90 preferred</td>
+        <td>Compute 12-month price performance percentile rank vs. relevant universe if IBD data unavailable.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>RS Rank Computation (Proprietary Alternative to IBD)</h3>
+  <p>Since IBD RS data requires a paid licence, the system should compute a proxy RS rank using
+  the following formula (widely used as an approximation):</p>
+
+  <div class="code-wrap">
+    <div class="code-label">RS Rank Calculation (Python pseudo-code)</div>
+    <div class="code-block"><code><span class="cm"># Weighted 12-month return (emphasises recent performance)</span>
+<span class="ck">def</span> <span class="cc">rs_score</span>(closes):
+    q1 = (closes[-1] / closes[-63]  - 1)  <span class="cm"># last 3 months</span>
+    q2 = (closes[-63] / closes[-126] - 1)  <span class="cm"># 3-6 months ago</span>
+    q3 = (closes[-126]/ closes[-189] - 1)  <span class="cm"># 6-9 months ago</span>
+    q4 = (closes[-189]/ closes[-252] - 1)  <span class="cm"># 9-12 months ago</span>
+    <span class="ck">return</span> (q1 * 0.40 + q2 * 0.20 + q3 * 0.20 + q4 * 0.20)
+
+<span class="cm"># Rank score as percentile across all stocks in the market universe</span>
+rs_rank = scipy.stats.percentileofscore(all_scores, stock_score)</code></div>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>India Market Adaptation:</strong> For NSE/BSE, the 52-week window references trading
+    days on the respective exchange. Account for exchange holidays independently — do not mix US and India
+    trading calendars. Use exchange-adjusted calendar for each market separately.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FUND RULES ═══════════════════════════ -->
+<section id="fund-rules">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--orange-dim)">💰</div>
+    <div class="section-head-text">
+      <h2>Deliverable 1B — Fundamental Criteria</h2>
+      <p>Layer 2 qualification — earnings, sales, margins, ROE, and institutional quality</p>
+    </div>
+  </div>
+
+  <p>Fundamental criteria form Layer 2 of the qualification engine. Stocks passing the Trend Template
+  (Layer 1) are evaluated against the following fundamental conditions. The methodology requires earnings
+  and sales growth to be <em>accelerating</em>, not merely positive.</p>
+
+  <h3>Earnings Per Share (EPS) Rules</h3>
+  <table class="rule-table">
+    <thead>
+      <tr>
+        <th style="width:72px">ID</th>
+        <th style="width:52px">Type</th>
+        <th>Rule</th>
+        <th>Programmatic Condition</th>
+        <th>Threshold</th>
+        <th>Source Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rule-id">EPS-01</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Most recent quarter EPS growth vs. same quarter prior year must be strongly positive</td>
+        <td><code>qEPS_growth_yoy &gt;= threshold</code></td>
+        <td>≥ 25% YoY (Pro: adjustable 15–100%)</td>
+        <td>Explicitly stated as key condition; "three out of four top performers" show meaningful Q EPS growth.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">EPS-02</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>EPS growth must be accelerating over the most recent 2–4 quarters (the rate of growth is increasing, not just positive)</td>
+        <td><code>qEPS_growth_q[-1] &gt; qEPS_growth_q[-2]</code> for at least 2 of last 3 quarter-over-quarter comparisons</td>
+        <td>Acceleration detected in ≥ 2 of last 3 Q comparisons</td>
+        <td>Explicitly stated: "more than 90 percent of biggest stock market winners showed some form of earnings acceleration."</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">EPS-03</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Annual EPS growth (TTM vs. prior year, or fiscal year) must be strongly positive</td>
+        <td><code>annual_eps_growth_yoy &gt;= threshold</code></td>
+        <td>≥ 25% YoY annual (Pro: adjustable 15–100%)</td>
+        <td>Explicitly linked to superperformance in multiple case studies.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">EPS-04</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Positive earnings surprise in most recent quarter (beat consensus estimates)</td>
+        <td><code>reported_EPS &gt; consensus_EPS</code></td>
+        <td>Any positive surprise; ≥ 5% preferred</td>
+        <td>Stated as important driver of institutional buying; exact threshold is "meaningful." 5% is conservative interpretation.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">EPS-05</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Analyst estimate revisions for next quarter / current FY trending upward</td>
+        <td><code>consensus_revision_30d &gt; 0</code></td>
+        <td>Positive revision direction; ≥ 5% revision = strong signal</td>
+        <td>Explicitly stated: revisions of 5%+ linked to better performance.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">EPS-06</span></td>
+        <td><span class="badge badge-context">COND</span></td>
+        <td>For turnaround situations: current EPS should be materially above prior distressed period</td>
+        <td><code>recent_2Q_avg_eps_growth &gt;= 100%</code> if prior 4 quarters showed negative or &lt; 10% growth</td>
+        <td>100%+ YoY for turnarounds (easy comp base)</td>
+        <td>Explicit guidance for turnaround classification in the methodology.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Sales / Revenue Rules</h3>
+  <table class="rule-table">
+    <thead>
+      <tr><th style="width:72px">ID</th><th style="width:52px">Type</th><th>Rule</th><th>Condition</th><th>Threshold</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rule-id">SLS-01</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Quarterly revenue growth YoY must be meaningful and accelerating</td>
+        <td><code>qRev_growth_yoy &gt;= threshold</code></td>
+        <td>≥ 20% YoY (Pro: adjustable 10–100%)</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">SLS-02</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Revenue growth should be accelerating in same direction as EPS growth (validates earnings quality)</td>
+        <td><code>qRev_growth_q[-1] &gt;= qRev_growth_q[-2]</code> for at least 1 of last 2 quarters</td>
+        <td>Acceleration in ≥ 1 of last 2 Q comparisons</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">SLS-03</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>EPS growth supported by revenue growth (not from cost-cutting alone); sales must be primary driver</td>
+        <td><code>qRev_growth_yoy &gt; 0 AND gross_margin stable or expanding</code></td>
+        <td>Revenue growth &gt; 0%; gross margin change ≥ -2 percentage points</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Margin & Quality Rules</h3>
+  <table class="rule-table">
+    <thead>
+      <tr><th style="width:72px">ID</th><th style="width:52px">Type</th><th>Rule</th><th>Condition</th><th>Threshold</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rule-id">MGN-01</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Operating or net profit margin must be trending stable or improving over trailing 4 quarters</td>
+        <td><code>net_margin_4Q_slope &gt;= 0</code></td>
+        <td>Non-negative slope over 4 quarters</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">MGN-02</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>"Code 33" pattern: simultaneous acceleration of sales AND margin expansion (highest quality)</td>
+        <td><code>qRev_growth accelerating AND net_margin_qoq &gt; 0</code></td>
+        <td>Both conditions true simultaneously = strong signal flag</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">MGN-03</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Return on Equity (ROE) reflects management efficiency at or above industry peers</td>
+        <td><code>roe &gt;= threshold</code></td>
+        <td>≥ 17% (Interpretation: consistent with growth company quality standard. Not explicitly stated as a single number in the text — this is a reasonable industry-standard interpretation consistent with the methodology's emphasis on high-quality management.)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout note">
+    <span class="callout-icon">💡</span>
+    <div><strong>ROE Threshold Note:</strong> The 17% ROE threshold is an industry-standard
+    interpretation of the methodology's stated preference for superior management and above-average
+    profitability relative to industry peers. The methodology does not state a single ROE number
+    explicitly. For Pro users, this should be adjustable from 10% to 35%.</div>
+  </div>
+
+  <h3>Liquidity & Market Cap Filters</h3>
+  <table class="rule-table">
+    <thead>
+      <tr><th style="width:72px">ID</th><th style="width:52px">Type</th><th>Rule</th><th>Condition</th><th>US Threshold</th><th>India Threshold</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rule-id">LQD-01</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Minimum average daily trading volume (avoid illiquid stocks)</td>
+        <td><code>avg_vol_50d &gt;= min_vol</code></td>
+        <td>100,000 shares/day</td>
+        <td>50,000 shares/day (NSE/BSE)</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">LQD-02</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Minimum stock price (avoid penny stocks)</td>
+        <td><code>price &gt;= min_price</code></td>
+        <td>≥ $5.00 USD</td>
+        <td>≥ ₹50 INR</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">LQD-03</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Prefer smaller-to-mid market cap for greater price appreciation potential</td>
+        <td><code>market_cap &lt;= preferred_cap_ceiling</code></td>
+        <td>US: &lt; $50B preferred; no hard cap</td>
+        <td>India: &lt; ₹50,000 Cr preferred; no hard cap</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">LQD-04</span></td>
+        <td><span class="badge badge-context">COND</span></td>
+        <td>Exclude ETFs, REITs (for fundamental filter layer; different earnings structure)</td>
+        <td><code>security_type NOT IN ('ETF','REIT','CEF')</code></td>
+        <td>Applies to fundamental layer only</td>
+        <td>Applies to fundamental layer only</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════ RS RULES ═══════════════════════════ -->
+<section id="rs-rules">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--teal-dim)">📡</div>
+    <div class="section-head-text">
+      <h2>Deliverable 1C — Relative Strength Concepts</h2>
+      <p>Price leadership metrics vs. market and peers</p>
+    </div>
+  </div>
+
+  <table class="rule-table">
+    <thead>
+      <tr><th style="width:72px">ID</th><th style="width:52px">Type</th><th>Rule</th><th>Condition</th><th>Threshold</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rule-id">RS-01</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>12-month price performance percentile rank vs. full market universe</td>
+        <td><code>rs_rank &gt;= 70</code></td>
+        <td>70th percentile minimum; 80–90 strongly preferred (explicitly stated)</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">RS-02</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>RS rank must be <em>improving</em> over the trailing 3 months (relative trend is up)</td>
+        <td><code>rs_rank_today &gt; rs_rank_63daysago</code></td>
+        <td>Positive slope required</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">RS-03</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>During market corrections, the stock declines less than the benchmark index (leadership resilience)</td>
+        <td><code>stock_drawdown &lt;= benchmark_drawdown * 1.5</code></td>
+        <td>Stock should not fall more than 1.5× the general market's correction during same period</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">RS-04</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Stock is in an industry group that itself is in a leading sector (top 20% of sector RS)</td>
+        <td><code>sector_rs_rank &gt;= 80</code></td>
+        <td>Sector RS 80th percentile or above</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">RS-05</span></td>
+        <td><span class="badge badge-context">COND</span></td>
+        <td>New 52-week high emergence: stock makes new high while market is still below its high (divergence)</td>
+        <td><code>stock_at_52wk_high AND benchmark &lt; benchmark_52wk_high * 0.95</code></td>
+        <td>Positive divergence flag; highly significant if condition met during market correction</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════ VOLUME RULES ═══════════════════════════ -->
+<section id="vol-rules">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--purple-dim)">📊</div>
+    <div class="section-head-text">
+      <h2>Deliverable 1D — Volume Requirements</h2>
+      <p>Institutional accumulation signals via volume analysis</p>
+    </div>
+  </div>
+
+  <table class="rule-table">
+    <thead>
+      <tr><th style="width:72px">ID</th><th style="width:52px">Type</th><th>Rule</th><th>Condition</th><th>Threshold</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rule-id">VOL-01</span></td>
+        <td><span class="badge badge-mandatory">MUST</span></td>
+        <td>Up days on volume should exceed down days on volume over trailing 20-day window (accumulation signal)</td>
+        <td><code>count(up_days_above_avg_vol) &gt; count(down_days_above_avg_vol)</code> over trailing 20 days</td>
+        <td>Majority of high-volume days must be up-days</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">VOL-02</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Recent trading volume during price advances is above 50-day average volume (institutional participation)</td>
+        <td><code>avg_vol_on_up_days_10d &gt;= avg_vol_50d * 1.0</code></td>
+        <td>Up-day volume ≥ 50-day average</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">VOL-03</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Volume on pullback/consolidation days is contracting (supply drying up — constructive sign)</td>
+        <td><code>avg_vol_on_down_days_10d &lt; avg_vol_50d * 0.8</code></td>
+        <td>Down-day volume &lt; 80% of 50-day average during consolidation</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">VOL-04</span></td>
+        <td><span class="badge badge-context">COND</span></td>
+        <td>Breakout day volume must be significantly above average (institutional demand confirmation)</td>
+        <td><code>breakout_day_vol &gt;= avg_vol_50d * 1.40</code></td>
+        <td>≥ 40% above 50-day average volume on the breakout day</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">VOL-05</span></td>
+        <td><span class="badge badge-context">COND</span></td>
+        <td>VCP pivot point: final contraction in base should have at least one day with significantly below-average volume (supply exhaustion)</td>
+        <td><code>min_vol_in_final_contraction &lt;= avg_vol_50d * 0.50</code></td>
+        <td>At least one day at ≤ 50% of 50-day average in the final VCP contraction</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════ BASE STRUCTURE ═══════════════════════════ -->
+<section id="base-rules">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--orange-dim)">🏗️</div>
+    <div class="section-head-text">
+      <h2>Deliverable 1E — Base Structure Concepts (VCP)</h2>
+      <p>Volatility Contraction Pattern detection — quantifiable logic</p>
+    </div>
+  </div>
+
+  <p>The VCP (Volatility Contraction Pattern) is the most important pattern the methodology describes.
+  It is partially quantifiable programmatically. The following rules capture the measurable aspects.</p>
+
+  <table class="rule-table">
+    <thead>
+      <tr><th style="width:72px">ID</th><th style="width:52px">Type</th><th>Rule</th><th>Condition</th><th>Threshold</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rule-id">VCP-01</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Base duration: stock must be in a consolidation (trading range) of appropriate length</td>
+        <td><code>base_duration_weeks BETWEEN 3 AND 65</code></td>
+        <td>3–65 weeks (explicitly stated range)</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">VCP-02</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Maximum correction depth within base: from base high to base low</td>
+        <td><code>base_correction_pct &lt;= max_correction</code></td>
+        <td>≤ 35% under normal conditions; ≤ 50% in severe bear markets. Avoid &gt; 60% corrections.</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">VCP-03</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Contractions (T-count): stock should show 2–4 successive depth reductions in volatility</td>
+        <td>Detect N local peak-to-trough corrections within base where each is ≤ 60% of prior correction depth</td>
+        <td>2–4 contractions; each ≈ 50% depth reduction from prior (approximate)</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">VCP-04</span></td>
+        <td><span class="badge badge-optional">SOFT</span></td>
+        <td>Right-side tightness: price range (H–L) in final 2 weeks of base should be narrow</td>
+        <td><code>avg_daily_range_pct_final_10d &lt;= avg_daily_range_pct_base_start * 0.50</code></td>
+        <td>Final price range ≤ 50% of initial volatility in the base</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">VCP-05</span></td>
+        <td><span class="badge badge-context">COND</span></td>
+        <td>Stock should not be in a late-stage base (base count ≥ 4) — late bases have higher failure rate</td>
+        <td>Count the number of separate consolidation bases since last major breakout; flag if count ≥ 4</td>
+        <td>Base count ≤ 3 preferred; count ≥ 4 is a warning flag, not a disqualifier</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>VCP Automation Limitation:</strong> Full VCP detection requires human pattern
+    recognition for subjective elements (symmetry, shakeout identification). The programmatic
+    version above captures the <em>measurable</em> aspects only. Consider adding a "VCP Signal"
+    flag rather than using it as a hard gate. Manual chart review remains necessary for
+    high-conviction qualification.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ RISK FILTERS ═══════════════════════════ -->
+<section id="risk-filters">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--red-dim)">🚫</div>
+    <div class="section-head-text">
+      <h2>Deliverable 1F — Risk & Disqualification Filters</h2>
+      <p>Conditions that automatically exclude a stock regardless of other criteria</p>
+    </div>
+  </div>
+
+  <table class="rule-table">
+    <thead>
+      <tr><th style="width:72px">ID</th><th>Disqualifying Condition</th><th>Programmatic Check</th><th>Reason</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rule-id">DQ-01</span></td>
+        <td>Stock in Stage 4 decline (price below falling 200-day MA)</td>
+        <td><code>price &lt; SMA200 AND SMA200_slope &lt; 0</code></td>
+        <td>Hard contradiction of Stage 2 requirement</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">DQ-02</span></td>
+        <td>200-day MA is declining (trending down)</td>
+        <td><code>SMA200_today &lt; SMA200_21daysago</code></td>
+        <td>Contradicts TT-03</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">DQ-03</span></td>
+        <td>Stock corrected more than 2–3× the general market correction during same period</td>
+        <td><code>stock_drawdown_20d &gt; benchmark_drawdown_20d * 3.0</code></td>
+        <td>Institutional distribution signal</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">DQ-04</span></td>
+        <td>EPS decelerating for 3+ consecutive quarters (growth rate declining)</td>
+        <td><code>eps_growth_q[-1] &lt; eps_growth_q[-2] &lt; eps_growth_q[-3]</code></td>
+        <td>Fundamental deterioration signal</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">DQ-05</span></td>
+        <td>Revenue growth is negative for the most recent reported quarter</td>
+        <td><code>qRev_growth_yoy &lt; 0</code></td>
+        <td>Earnings sustainability requires revenue support</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">DQ-06</span></td>
+        <td>Stock corrected more than 60% from its 52-week high (excessive overhead supply)</td>
+        <td><code>price &lt; high_52w * 0.40</code></td>
+        <td>Overhead supply too great for clean advance</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">DQ-07</span></td>
+        <td>Major one-day price break on high volume (largest single-day decline since Stage 2 began)</td>
+        <td><code>daily_decline &gt;= 8% AND daily_vol &gt;= avg_vol_50d * 2.0 AND IS_new_max_daily_decline_since_stage2</code></td>
+        <td>Institutional distribution / topping signal</td>
+      </tr>
+      <tr>
+        <td><span class="rule-id">DQ-08</span></td>
+        <td>Stock has insufficient trading history (fewer than 200 trading days available)</td>
+        <td><code>history_length_days &lt; 200</code></td>
+        <td>Cannot compute required moving averages</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════ RULE MATRIX ═══════════════════════════ -->
+<section id="rule-matrix">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--blue-dim)">📋</div>
+    <div class="section-head-text">
+      <h2>Deliverable 1G — Consolidated Rule Matrix</h2>
+      <p>All 38 rules classified by tier, layer, and access level</p>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h4 style="color:var(--red)">Mandatory Rules (Hard Gates) — 14 total</h4>
+      <p>All must pass. Any single failure = disqualified.</p>
+      <ul>
+        <li>TT-01 through TT-08 (Trend Template)</li>
+        <li>EPS-01 (quarterly EPS growth ≥ 25%)</li>
+        <li>EPS-02 (EPS acceleration)</li>
+        <li>EPS-03 (annual EPS growth ≥ 25%)</li>
+        <li>SLS-01 (quarterly revenue growth ≥ 20%)</li>
+        <li>MGN-01 (margin stable or improving)</li>
+        <li>LQD-01 (minimum volume)</li>
+        <li>LQD-02 (minimum price)</li>
+        <li>VOL-01 (up-day volume dominance)</li>
+        <li>RS-01 (RS rank ≥ 70)</li>
+        <li>RS-02 (RS rank improving)</li>
+        <li>DQ-01 through DQ-08 (disqualifiers)</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:var(--blue)">Optional Rules (Score Enhancers) — 14 total</h4>
+      <p>Add to a composite "confidence score" (1–100). Not hard gates.</p>
+      <ul>
+        <li>EPS-04 (positive earnings surprise)</li>
+        <li>EPS-05 (upward estimate revisions)</li>
+        <li>SLS-02 (revenue acceleration)</li>
+        <li>SLS-03 (earnings quality: revenue-driven)</li>
+        <li>MGN-02 (Code 33 pattern)</li>
+        <li>MGN-03 (ROE ≥ 17%)</li>
+        <li>LQD-03 (preferred market cap range)</li>
+        <li>VOL-02 (above-avg volume on up-days)</li>
+        <li>VOL-03 (contracting volume on down-days)</li>
+        <li>RS-03 (market correction resilience)</li>
+        <li>RS-04 (leading sector)</li>
+        <li>VCP-01 through VCP-04 (base structure)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h4 style="color:var(--orange)">Context-Dependent Rules — 10 total</h4>
+  <p>Applied only when specific conditions are detected (turnaround, breakout day, VCP pivot, etc.):</p>
+  <ul>
+    <li>EPS-06 (turnaround EPS requirement)</li>
+    <li>VOL-04 (breakout volume — applied on breakout detection day)</li>
+    <li>VOL-05 (VCP pivot supply exhaustion)</li>
+    <li>RS-05 (divergent new high during market correction)</li>
+    <li>VCP-05 (late-stage base warning)</li>
+    <li>LQD-04 (ETF/REIT exclusion in fundamental layer)</li>
+    <li>DQ-03 (relative drawdown vs. market)</li>
+    <li>DQ-07 (material single-day break)</li>
+    <li>TT-03 (preferred duration applied contextually)</li>
+  </ul>
+</section>
+
+<!-- ═══════════════════════════ DATA SOURCES ═══════════════════════════ -->
+<section id="data-sources">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--teal-dim)">🌐</div>
+    <div class="section-head-text">
+      <h2>Deliverable 3 — Data Source Recommendations</h2>
+      <p>US and India market data providers, cost tiers, and reliability assessment</p>
+    </div>
+  </div>
+
+  <h3>US Market Data</h3>
+  <table class="rule-table">
+    <thead>
+      <tr><th>Provider</th><th>Data Type</th><th>API Type</th><th>Cost Tier</th><th>Reliability</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Polygon.io</strong></td>
+        <td>Price/Volume, Fundamentals, Corporate Actions</td>
+        <td>REST + WebSocket</td>
+        <td>$29–$199/mo</td>
+        <td>★★★★★</td>
+        <td>Best all-in-one for US equities. Real-time + historical. Good fundamentals via Financials API.</td>
+      </tr>
+      <tr>
+        <td><strong>Alpha Vantage</strong></td>
+        <td>Price/Volume, EPS, Income Statement</td>
+        <td>REST</td>
+        <td>Free–$50/mo</td>
+        <td>★★★☆☆</td>
+        <td>Good for prototyping. Rate limits tight on free tier. Fundamental data quality inconsistent.</td>
+      </tr>
+      <tr>
+        <td><strong>Yahoo Finance (yfinance)</strong></td>
+        <td>Price/Volume, Basic Fundamentals</td>
+        <td>Unofficial REST</td>
+        <td>Free</td>
+        <td>★★☆☆☆</td>
+        <td>Existing system uses this. Not suitable for production SaaS — rate limits, no SLA, can break.</td>
+      </tr>
+      <tr>
+        <td><strong>Intrinio</strong></td>
+        <td>Fundamentals (EPS, Revenue, Margins, Estimates)</td>
+        <td>REST</td>
+        <td>$150–$500/mo</td>
+        <td>★★★★☆</td>
+        <td>Best fundamental data quality for US. Analyst estimates. Standardised financials.</td>
+      </tr>
+      <tr>
+        <td><strong>EODHD</strong></td>
+        <td>Price, Fundamentals, Sector Data</td>
+        <td>REST</td>
+        <td>$20–$80/mo</td>
+        <td>★★★★☆</td>
+        <td>Global coverage including India. Good value. Decent fundamental data.</td>
+      </tr>
+      <tr>
+        <td><strong>Tiingo</strong></td>
+        <td>EOD Price, IEX feed for intraday</td>
+        <td>REST + WebSocket</td>
+        <td>Free–$30/mo</td>
+        <td>★★★★☆</td>
+        <td>Excellent for daily OHLCV. Limited fundamentals.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>India Market Data (NSE/BSE)</h3>
+  <table class="rule-table">
+    <thead>
+      <tr><th>Provider</th><th>Data Type</th><th>API</th><th>Cost</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>NSE India Official</strong></td>
+        <td>EOD prices, Indices</td>
+        <td>REST (unofficial, no official API)</td>
+        <td>Free</td>
+        <td>Unofficial scraping only. Not production-reliable. Use as fallback verification only.</td>
+      </tr>
+      <tr>
+        <td><strong>Dhan / Upstox / Zerodha APIs</strong></td>
+        <td>Real-time + historical price data</td>
+        <td>REST + WebSocket</td>
+        <td>Free (brokerage account required)</td>
+        <td>Excellent real-time data. Requires user account linkage. Good for registered brokers.</td>
+      </tr>
+      <tr>
+        <td><strong>Sensibull / NSE Data Connect</strong></td>
+        <td>NSE historical data</td>
+        <td>REST</td>
+        <td>₹2,000–₹10,000/mo</td>
+        <td>Official NSE data distributor. Most reliable for NSE. BSE has separate provider.</td>
+      </tr>
+      <tr>
+        <td><strong>Screener.in API / Trendlyne API</strong></td>
+        <td>Fundamentals (EPS, Revenue, PE, ROE)</td>
+        <td>REST</td>
+        <td>₹5,000–₹20,000/mo</td>
+        <td>Best India fundamental data. Analyst estimates limited. Consider for initial build.</td>
+      </tr>
+      <tr>
+        <td><strong>EODHD (India coverage)</strong></td>
+        <td>NSE/BSE price + basic fundamentals</td>
+        <td>REST</td>
+        <td>$20–$80/mo (combined US+India)</td>
+        <td>Good entry point. Single API for US + India. Fundamental quality acceptable for v1.</td>
+      </tr>
+      <tr>
+        <td><strong>BSE India Official</strong></td>
+        <td>BSE corporate actions, announcements</td>
+        <td>REST (official)</td>
+        <td>Free</td>
+        <td>Use for corporate action data (splits, dividends, bonus shares) — critical for price adjustment.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>Corporate Action Adjustments (India):</strong> Indian markets have frequent bonus
+    shares and stock splits that are NOT always reflected immediately in data provider APIs.
+    You MUST build a corporate action normalisation layer that adjusts all historical prices and
+    volumes using BSE/NSE corporate action feeds. Failure to do this will produce false
+    screening signals.</div>
+  </div>
+
+  <div class="callout note">
+    <span class="callout-icon">💡</span>
+    <div><strong>Recommended Stack for V1:</strong> EODHD (price + basic fundamentals, US + India
+    combined) + Intrinio (US fundamental depth) + Screener.in/Trendlyne (India fundamentals).
+    This covers both markets with reasonable cost before scaling to more expensive institutional feeds.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ DB SCHEMA ═══════════════════════════ -->
+<section id="db-schema">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--purple-dim)">🗃️</div>
+    <div class="section-head-text">
+      <h2>Deliverable 2 — Database Schema Design</h2>
+      <p>PostgreSQL schema with 14 core tables, optimised for time-series screening workloads</p>
+    </div>
+  </div>
+
+  <div class="callout note">
+    <span class="callout-icon">💡</span>
+    <div><strong>Database Choice:</strong> PostgreSQL with TimescaleDB extension for time-series
+    performance. Hypertable partitioning on <code>daily_prices</code> and
+    <code>screening_results</code> by date. Redis for intraday cache and alert queuing.</div>
+  </div>
+
+  <!-- markets -->
+  <div class="schema-card">
+    <div class="schema-card-header">
+      <span class="schema-table-name">markets</span>
+      <span style="font-size:11px;color:var(--text3)">— Exchange registry</span>
+    </div>
+    <div class="schema-card-body">
+      <div class="schema-row"><span class="schema-col">market_id</span><span class="schema-type">SERIAL PK</span><span class="schema-desc">Auto-increment primary key</span></div>
+      <div class="schema-row"><span class="schema-col">code</span><span class="schema-type">VARCHAR(10)</span><span class="schema-desc">Exchange code: 'US', 'NSE', 'BSE'</span></div>
+      <div class="schema-row"><span class="schema-col">name</span><span class="schema-type">VARCHAR(100)</span><span class="schema-desc">Full exchange name</span></div>
+      <div class="schema-row"><span class="schema-col">currency</span><span class="schema-type">CHAR(3)</span><span class="schema-desc">ISO currency: USD, INR</span></div>
+      <div class="schema-row"><span class="schema-col">timezone</span><span class="schema-type">VARCHAR(50)</span><span class="schema-desc">IANA tz: 'America/New_York', 'Asia/Kolkata'</span></div>
+      <div class="schema-row"><span class="schema-col">min_price</span><span class="schema-type">NUMERIC(10,4)</span><span class="schema-desc">Minimum price filter for this market</span></div>
+      <div class="schema-row"><span class="schema-col">min_avg_vol</span><span class="schema-type">BIGINT</span><span class="schema-desc">Minimum 50-day average volume</span></div>
+    </div>
+  </div>
+
+  <!-- securities -->
+  <div class="schema-card">
+    <div class="schema-card-header">
+      <span class="schema-table-name">securities</span>
+      <span style="font-size:11px;color:var(--text3)">— Master stock universe</span>
+    </div>
+    <div class="schema-card-body">
+      <div class="schema-row"><span class="schema-col">security_id</span><span class="schema-type">SERIAL PK</span><span class="schema-desc">Internal ID</span></div>
+      <div class="schema-row"><span class="schema-col">market_id</span><span class="schema-type">INT FK</span><span class="schema-desc">→ markets.market_id</span></div>
+      <div class="schema-row"><span class="schema-col">ticker</span><span class="schema-type">VARCHAR(20)</span><span class="schema-desc">Exchange ticker symbol</span></div>
+      <div class="schema-row"><span class="schema-col">name</span><span class="schema-type">VARCHAR(200)</span><span class="schema-desc">Company name</span></div>
+      <div class="schema-row"><span class="schema-col">isin</span><span class="schema-type">CHAR(12)</span><span class="schema-desc">ISIN for cross-market deduplication</span></div>
+      <div class="schema-row"><span class="schema-col">sector</span><span class="schema-type">VARCHAR(100)</span><span class="schema-desc">GICS or NSE sector classification</span></div>
+      <div class="schema-row"><span class="schema-col">industry</span><span class="schema-type">VARCHAR(150)</span><span class="schema-desc">Industry group</span></div>
+      <div class="schema-row"><span class="schema-col">security_type</span><span class="schema-type">VARCHAR(20)</span><span class="schema-desc">'EQUITY', 'ETF', 'REIT', 'CEF'</span></div>
+      <div class="schema-row"><span class="schema-col">is_active</span><span class="schema-type">BOOLEAN</span><span class="schema-desc">True if currently listed and tradeable</span></div>
+      <div class="schema-row"><span class="schema-col">ipo_date</span><span class="schema-type">DATE</span><span class="schema-desc">IPO / listing date</span></div>
+      <div class="schema-row"><span class="schema-col">shares_outstanding</span><span class="schema-type">BIGINT</span><span class="schema-desc">Most recently reported shares outstanding</span></div>
+      <div class="schema-row"><span class="schema-col">created_at</span><span class="schema-type">TIMESTAMPTZ</span><span class="schema-desc">Record creation timestamp</span></div>
+      <div class="schema-row"><span class="schema-col">updated_at</span><span class="schema-type">TIMESTAMPTZ</span><span class="schema-desc">Last modified timestamp</span></div>
+    </div>
+  </div>
+
+  <!-- daily prices -->
+  <div class="schema-card">
+    <div class="schema-card-header">
+      <span class="schema-table-name">daily_prices</span>
+      <span style="font-size:11px;color:var(--text3)">— TimescaleDB hypertable, partitioned by date. Adjusted OHLCV.</span>
+    </div>
+    <div class="schema-card-body">
+      <div class="schema-row"><span class="schema-col">security_id</span><span class="schema-type">INT FK</span><span class="schema-desc">→ securities.security_id</span></div>
+      <div class="schema-row"><span class="schema-col">price_date</span><span class="schema-type">DATE PK</span><span class="schema-desc">Trading date (partition key)</span></div>
+      <div class="schema-row"><span class="schema-col">open_adj</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">Adjusted open price (corp action adjusted)</span></div>
+      <div class="schema-row"><span class="schema-col">high_adj</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">Adjusted high</span></div>
+      <div class="schema-row"><span class="schema-col">low_adj</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">Adjusted low</span></div>
+      <div class="schema-row"><span class="schema-col">close_adj</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">Adjusted close (primary for all calculations)</span></div>
+      <div class="schema-row"><span class="schema-col">volume_adj</span><span class="schema-type">BIGINT</span><span class="schema-desc">Adjusted volume</span></div>
+      <div class="schema-row"><span class="schema-col">close_raw</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">Unadjusted close (for display to users)</span></div>
+      <div class="schema-row"><span class="schema-col">volume_raw</span><span class="schema-type">BIGINT</span><span class="schema-desc">Unadjusted volume</span></div>
+      <div class="schema-row"><span class="schema-col">adj_factor</span><span class="schema-type">NUMERIC(10,6)</span><span class="schema-desc">Cumulative adjustment factor applied</span></div>
+      <div class="schema-row"><span class="schema-col">source_id</span><span class="schema-type">SMALLINT</span><span class="schema-desc">Data source identifier for audit</span></div>
+    </div>
+  </div>
+
+  <!-- computed indicators -->
+  <div class="schema-card">
+    <div class="schema-card-header">
+      <span class="schema-table-name">computed_indicators</span>
+      <span style="font-size:11px;color:var(--text3)">— Pre-computed daily indicators. Rebuilt nightly by screening engine.</span>
+    </div>
+    <div class="schema-card-body">
+      <div class="schema-row"><span class="schema-col">security_id</span><span class="schema-type">INT FK, PK</span><span class="schema-desc">→ securities</span></div>
+      <div class="schema-row"><span class="schema-col">calc_date</span><span class="schema-type">DATE PK</span><span class="schema-desc">Calculation date (partition key)</span></div>
+      <div class="schema-row"><span class="schema-col">sma_50</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">50-day simple moving average of adj close</span></div>
+      <div class="schema-row"><span class="schema-col">sma_150</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">150-day SMA</span></div>
+      <div class="schema-row"><span class="schema-col">sma_200</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">200-day SMA</span></div>
+      <div class="schema-row"><span class="schema-col">sma_200_21d_ago</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">200-day SMA as of 21 trading days prior</span></div>
+      <div class="schema-row"><span class="schema-col">sma_200_63d_ago</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">200-day SMA as of 63 trading days prior</span></div>
+      <div class="schema-row"><span class="schema-col">high_52w</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">52-week high (adj)</span></div>
+      <div class="schema-row"><span class="schema-col">low_52w</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">52-week low (adj)</span></div>
+      <div class="schema-row"><span class="schema-col">avg_vol_50d</span><span class="schema-type">BIGINT</span><span class="schema-desc">50-day average volume</span></div>
+      <div class="schema-row"><span class="schema-col">rs_score</span><span class="schema-type">NUMERIC(8,4)</span><span class="schema-desc">Raw weighted 12-month RS score</span></div>
+      <div class="schema-row"><span class="schema-col">rs_rank</span><span class="schema-type">SMALLINT</span><span class="schema-desc">Percentile rank vs. market universe (0–100)</span></div>
+      <div class="schema-row"><span class="schema-col">rs_rank_63d_ago</span><span class="schema-type">SMALLINT</span><span class="schema-desc">RS rank 63 trading days ago (trend check)</span></div>
+      <div class="schema-row"><span class="schema-col">up_vol_days_20d</span><span class="schema-type">SMALLINT</span><span class="schema-desc">Count of up days with above-average volume in last 20 days</span></div>
+      <div class="schema-row"><span class="schema-col">down_vol_days_20d</span><span class="schema-type">SMALLINT</span><span class="schema-desc">Count of down days with above-average volume in last 20 days</span></div>
+      <div class="schema-row"><span class="schema-col">market_cap</span><span class="schema-type">NUMERIC(18,2)</span><span class="schema-desc">Market cap in native currency at close</span></div>
+      <div class="schema-row"><span class="schema-col">pct_from_52wh</span><span class="schema-type">NUMERIC(8,4)</span><span class="schema-desc">% below 52-week high (negative = above)</span></div>
+      <div class="schema-row"><span class="schema-col">pct_above_52wl</span><span class="schema-type">NUMERIC(8,4)</span><span class="schema-desc">% above 52-week low</span></div>
+    </div>
+  </div>
+
+  <!-- fundamentals -->
+  <div class="schema-card">
+    <div class="schema-card-header">
+      <span class="schema-table-name">fundamentals_quarterly</span>
+      <span style="font-size:11px;color:var(--text3)">— Reported quarterly financials, one row per reporting period</span>
+    </div>
+    <div class="schema-card-body">
+      <div class="schema-row"><span class="schema-col">security_id</span><span class="schema-type">INT FK, PK</span><span class="schema-desc">→ securities</span></div>
+      <div class="schema-row"><span class="schema-col">period_end</span><span class="schema-type">DATE PK</span><span class="schema-desc">Quarter end date</span></div>
+      <div class="schema-row"><span class="schema-col">report_date</span><span class="schema-type">DATE</span><span class="schema-desc">Actual announcement date</span></div>
+      <div class="schema-row"><span class="schema-col">eps_reported</span><span class="schema-type">NUMERIC(10,4)</span><span class="schema-desc">Reported EPS (diluted)</span></div>
+      <div class="schema-row"><span class="schema-col">eps_estimate</span><span class="schema-type">NUMERIC(10,4)</span><span class="schema-desc">Consensus EPS estimate at time of report</span></div>
+      <div class="schema-row"><span class="schema-col">eps_surprise_pct</span><span class="schema-type">NUMERIC(8,4)</span><span class="schema-desc">% beat/miss vs. estimate</span></div>
+      <div class="schema-row"><span class="schema-col">eps_yoy_growth</span><span class="schema-type">NUMERIC(10,4)</span><span class="schema-desc">EPS % change vs same quarter prior year</span></div>
+      <div class="schema-row"><span class="schema-col">revenue</span><span class="schema-type">NUMERIC(18,2)</span><span class="schema-desc">Total revenue in native currency</span></div>
+      <div class="schema-row"><span class="schema-col">revenue_yoy_growth</span><span class="schema-type">NUMERIC(10,4)</span><span class="schema-desc">Revenue % change vs same quarter prior year</span></div>
+      <div class="schema-row"><span class="schema-col">gross_margin</span><span class="schema-type">NUMERIC(8,4)</span><span class="schema-desc">Gross profit margin %</span></div>
+      <div class="schema-row"><span class="schema-col">operating_margin</span><span class="schema-type">NUMERIC(8,4)</span><span class="schema-desc">Operating profit margin %</span></div>
+      <div class="schema-row"><span class="schema-col">net_margin</span><span class="schema-type">NUMERIC(8,4)</span><span class="schema-desc">Net profit margin %</span></div>
+      <div class="schema-row"><span class="schema-col">roe_ttm</span><span class="schema-type">NUMERIC(8,4)</span><span class="schema-desc">Return on equity (trailing twelve months)</span></div>
+      <div class="schema-row"><span class="schema-col">is_preliminary</span><span class="schema-type">BOOLEAN</span><span class="schema-desc">True if data is preliminary/unaudited</span></div>
+    </div>
+  </div>
+
+  <!-- screening results -->
+  <div class="schema-card">
+    <div class="schema-card-header">
+      <span class="schema-table-name">screening_results</span>
+      <span style="font-size:11px;color:var(--text3)">— Daily qualification outcomes. Core output table. TimescaleDB hypertable.</span>
+    </div>
+    <div class="schema-card-body">
+      <div class="schema-row"><span class="schema-col">result_id</span><span class="schema-type">BIGSERIAL PK</span><span class="schema-desc">Auto-increment PK</span></div>
+      <div class="schema-row"><span class="schema-col">security_id</span><span class="schema-type">INT FK</span><span class="schema-desc">→ securities</span></div>
+      <div class="schema-row"><span class="schema-col">screen_date</span><span class="schema-type">DATE</span><span class="schema-desc">Date screening was run (partition key)</span></div>
+      <div class="schema-row"><span class="schema-col">market_id</span><span class="schema-type">INT FK</span><span class="schema-desc">→ markets</span></div>
+      <div class="schema-row"><span class="schema-col">qualifies</span><span class="schema-type">BOOLEAN</span><span class="schema-desc">True = passes all mandatory criteria</span></div>
+      <div class="schema-row"><span class="schema-col">confidence_score</span><span class="schema-type">SMALLINT</span><span class="schema-desc">0–100 composite score from optional criteria</span></div>
+      <div class="schema-row"><span class="schema-col">tech_score</span><span class="schema-type">SMALLINT</span><span class="schema-desc">0–8 (count of Trend Template criteria met)</span></div>
+      <div class="schema-row"><span class="schema-col">fund_score</span><span class="schema-type">SMALLINT</span><span class="schema-desc">0–10 (fundamental criteria score)</span></div>
+      <div class="schema-row"><span class="schema-col">criteria_detail</span><span class="schema-type">JSONB</span><span class="schema-desc">Full breakdown: {TT01: true, EPS01: true, ...}</span></div>
+      <div class="schema-row"><span class="schema-col">fail_reasons</span><span class="schema-type">TEXT[]</span><span class="schema-desc">Array of rule IDs that failed (for disqualified stocks)</span></div>
+      <div class="schema-row"><span class="schema-col">is_new_qualifier</span><span class="schema-type">BOOLEAN</span><span class="schema-desc">True if qualified today but NOT qualified yesterday</span></div>
+      <div class="schema-row"><span class="schema-col">is_disqualified</span><span class="schema-type">BOOLEAN</span><span class="schema-desc">True if qualified yesterday but NOT today</span></div>
+      <div class="schema-row"><span class="schema-col">price_at_qualification</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">Close price on qualification date (for performance tracking)</span></div>
+      <div class="schema-row"><span class="schema-col">run_duration_ms</span><span class="schema-type">INT</span><span class="schema-desc">Time taken to evaluate this stock (monitoring)</span></div>
+    </div>
+  </div>
+
+  <!-- performance tracking -->
+  <div class="schema-card">
+    <div class="schema-card-header">
+      <span class="schema-table-name">qualification_performance</span>
+      <span style="font-size:11px;color:var(--text3)">— Historical return tracking after each qualification event</span>
+    </div>
+    <div class="schema-card-body">
+      <div class="schema-row"><span class="schema-col">perf_id</span><span class="schema-type">BIGSERIAL PK</span><span class="schema-desc">Auto-increment PK</span></div>
+      <div class="schema-row"><span class="schema-col">security_id</span><span class="schema-type">INT FK</span><span class="schema-desc">→ securities</span></div>
+      <div class="schema-row"><span class="schema-col">qualification_date</span><span class="schema-type">DATE</span><span class="schema-desc">First day stock qualified (start of tracking window)</span></div>
+      <div class="schema-row"><span class="schema-col">market_id</span><span class="schema-type">INT FK</span><span class="schema-desc">→ markets</span></div>
+      <div class="schema-row"><span class="schema-col">price_at_qual</span><span class="schema-type">NUMERIC(14,4)</span><span class="schema-desc">Price on qualification date (baseline)</span></div>
+      <div class="schema-row"><span class="schema-col">return_1w</span><span class="schema-type">NUMERIC(10,4)</span><span class="schema-desc">Price return 5 trading days after qualification</span></div>
+      <div class="schema-row"><span class="schema-col">return_4w</span><span class="schema-type">NUMERIC(10,4)</span><span class="schema-desc">Price return 20 trading days after qualification</span></div>
+      <div class="schema-row"><span class="schema-col">return_12w</span><span class="schema-type">NUMERIC(10,4)</span><span class="schema-desc">Price return 60 trading days after qualification</span></div>
+      <div class="schema-row"><span class="schema-col">max_drawdown_12w</span><span class="schema-type">NUMERIC(10,4)</span><span class="schema-desc">Maximum % drawdown from qualification price within 60-day window</span></div>
+      <div class="schema-row"><span class="schema-col">failed</span><span class="schema-type">BOOLEAN</span><span class="schema-desc">True if stock declined &gt; 20% from qualification price at any point in 12w</span></div>
+      <div class="schema-row"><span class="schema-col">confidence_score_at_qual</span><span class="schema-type">SMALLINT</span><span class="schema-desc">Score at time of qualification (for correlation analysis)</span></div>
+      <div class="schema-row"><span class="schema-col">computed_at</span><span class="schema-type">TIMESTAMPTZ</span><span class="schema-desc">When this record was last computed/updated</span></div>
+    </div>
+  </div>
+
+  <h3>Remaining Tables (Summary)</h3>
+  <table class="rule-table">
+    <thead>
+      <tr><th>Table</th><th>Purpose</th><th>Key Columns</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>users</code></td><td>SaaS user accounts</td><td>user_id, email, password_hash, tier ('basic'/'pro'), stripe_customer_id, created_at</td></tr>
+      <tr><td><code>subscriptions</code></td><td>Billing and tier management</td><td>subscription_id, user_id, tier, status, stripe_subscription_id, current_period_end</td></tr>
+      <tr><td><code>user_settings</code></td><td>Per-user custom filter thresholds (Pro only)</td><td>user_id, market_id, custom_thresholds JSONB (overrides defaults per rule ID)</td></tr>
+      <tr><td><code>watchlists</code></td><td>User-defined watchlist securities</td><td>watchlist_id, user_id, name, created_at</td></tr>
+      <tr><td><code>watchlist_items</code></td><td>Securities in each watchlist</td><td>watchlist_id, security_id, added_at, notes</td></tr>
+      <tr><td><code>alert_log</code></td><td>All sent alerts with delivery status</td><td>alert_id, user_id, alert_type, security_id, channel ('email'/'push'/'webhook'), sent_at, status</td></tr>
+      <tr><td><code>market_breadth_daily</code></td><td>Daily aggregate qualifier counts per market</td><td>breadth_date, market_id, total_qualifiers, new_qualifiers, disqualified, total_screened</td></tr>
+    </tbody>
+  </table>
+
+  <div class="code-wrap">
+    <div class="code-label">Key Index Definitions (PostgreSQL)</div>
+    <div class="code-block"><code><span class="cm">-- Primary performance indexes</span>
+<span class="ck">CREATE INDEX</span> idx_daily_prices_sid_date    <span class="ck">ON</span> daily_prices (security_id, price_date <span class="ck">DESC</span>);
+<span class="ck">CREATE INDEX</span> idx_screening_results_date    <span class="ck">ON</span> screening_results (screen_date <span class="ck">DESC</span>, qualifies);
+<span class="ck">CREATE INDEX</span> idx_screening_results_new     <span class="ck">ON</span> screening_results (screen_date, is_new_qualifier) <span class="ck">WHERE</span> is_new_qualifier = <span class="cn">true</span>;
+<span class="ck">CREATE INDEX</span> idx_computed_indicators_date   <span class="ck">ON</span> computed_indicators (calc_date <span class="ck">DESC</span>, security_id);
+<span class="ck">CREATE INDEX</span> idx_fundamentals_q_sid_period  <span class="ck">ON</span> fundamentals_quarterly (security_id, period_end <span class="ck">DESC</span>);
+<span class="ck">CREATE INDEX</span> idx_securities_market          <span class="ck">ON</span> securities (market_id, is_active);
+<span class="ck">CREATE INDEX</span> idx_perf_qual_date             <span class="ck">ON</span> qualification_performance (qualification_date <span class="ck">DESC</span>);
+<span class="ck">CREATE INDEX</span> idx_alert_log_user             <span class="ck">ON</span> alert_log (user_id, sent_at <span class="ck">DESC</span>);</code></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ BACKEND ═══════════════════════════ -->
+<section id="backend">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--blue-dim)">⚙️</div>
+    <div class="section-head-text">
+      <h2>Deliverable 4 — Backend Architecture</h2>
+      <p>Service topology, technology choices, and data pipeline design</p>
+    </div>
+  </div>
+
+  <div class="arch-grid">
+    <div class="arch-card">
+      <div class="arch-card-head"><span class="arch-card-icon">🔧</span><span class="arch-card-title">Core API Server</span></div>
+      <ul>
+        <li><strong>Runtime:</strong> Python 3.11+ with FastAPI</li>
+        <li><strong>Auth:</strong> JWT (access) + Refresh tokens; Supabase Auth or custom</li>
+        <li><strong>Rate limiting:</strong> Redis-based sliding window per user tier</li>
+        <li><strong>Versioning:</strong> /api/v1/ prefix on all routes</li>
+        <li><strong>Docs:</strong> OpenAPI/Swagger auto-generated</li>
+      </ul>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-head"><span class="arch-card-icon">🔄</span><span class="arch-card-title">Screening Pipeline (Async Worker)</span></div>
+      <ul>
+        <li><strong>Runner:</strong> Celery workers with Redis broker</li>
+        <li><strong>Schedule:</strong> 2 jobs: US (after 4:30 PM ET) + India (after 3:45 PM IST)</li>
+        <li><strong>Parallelism:</strong> Batch securities in groups of 500; parallel Celery tasks</li>
+        <li><strong>Monitoring:</strong> Flower dashboard; Prometheus metrics</li>
+      </ul>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-head"><span class="arch-card-icon">🗄️</span><span class="arch-card-title">Data Layer</span></div>
+      <ul>
+        <li><strong>Primary DB:</strong> PostgreSQL 15 + TimescaleDB extension</li>
+        <li><strong>Cache:</strong> Redis 7 (indicator cache, session, rate limits)</li>
+        <li><strong>Object store:</strong> S3 (CSV exports, report PDFs)</li>
+        <li><strong>Search:</strong> PostgreSQL full-text search (no external engine needed at v1)</li>
+      </ul>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-head"><span class="arch-card-icon">📡</span><span class="arch-card-title">Data Ingestion Service</span></div>
+      <ul>
+        <li><strong>Scheduler:</strong> APScheduler or cloud cron (AWS EventBridge)</li>
+        <li><strong>Providers:</strong> EODHD (price) + Intrinio (US fundamentals) + Screener.in (India fundamentals)</li>
+        <li><strong>Corp actions:</strong> Dedicated normalisation pipeline (runs before price ingestion)</li>
+        <li><strong>Backfill:</strong> Historical loader for initial database population</li>
+      </ul>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-head"><span class="arch-card-icon">📨</span><span class="arch-card-title">Alert & Notification Service</span></div>
+      <ul>
+        <li><strong>Email:</strong> AWS SES or SendGrid (transactional)</li>
+        <li><strong>Push:</strong> Firebase Cloud Messaging (web + mobile)</li>
+        <li><strong>Webhook:</strong> User-configurable HTTP endpoints (Pro)</li>
+        <li><strong>Telegram:</strong> Bot API (existing users)</li>
+        <li><strong>Queue:</strong> Redis queue, drained by notification worker</li>
+      </ul>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-head"><span class="arch-card-icon">💳</span><span class="arch-card-title">Billing & Subscription</span></div>
+      <ul>
+        <li><strong>Provider:</strong> Stripe (subscriptions + webhooks)</li>
+        <li><strong>Plans:</strong> Basic (monthly/annual) + Pro (monthly/annual)</li>
+        <li><strong>Enforcement:</strong> Middleware checks subscription status on every API call</li>
+        <li><strong>Dunning:</strong> Stripe automated payment retry + email</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Infrastructure Stack</h3>
+  <table class="rule-table">
+    <thead><tr><th>Component</th><th>Choice</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td>Cloud</td><td>AWS (or GCP/Azure)</td><td>Multi-region capability for US + India latency</td></tr>
+      <tr><td>Compute</td><td>ECS Fargate (containers)</td><td>No server management; auto-scaling; cost-efficient</td></tr>
+      <tr><td>Database</td><td>RDS PostgreSQL + TimescaleDB on EC2</td><td>TimescaleDB requires EC2 for extension support</td></tr>
+      <tr><td>CDN</td><td>CloudFront</td><td>Static asset serving for React dashboard</td></tr>
+      <tr><td>CI/CD</td><td>GitHub Actions → ECR → ECS deployment</td><td>Standard DevOps pipeline</td></tr>
+      <tr><td>Secrets</td><td>AWS Secrets Manager</td><td>API keys, DB credentials, JWT secrets</td></tr>
+      <tr><td>Monitoring</td><td>Datadog or Grafana + Prometheus</td><td>System + business metrics in one place</td></tr>
+      <tr><td>Error tracking</td><td>Sentry</td><td>Runtime error capture for both backend and frontend</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════ SCREENING ENGINE ═══════════════════════════ -->
+<section id="engine">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--green-dim)">⚡</div>
+    <div class="section-head-text">
+      <h2>Deliverable 5 — Screening Engine Logic Flow</h2>
+      <p>Step-by-step execution sequence for the daily qualification run</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--green-dim);color:var(--green)">1</div>
+      <div class="flow-step-body">
+        <h4>Data Validation Gate</h4>
+        <p>Before screening begins, verify: (a) price data for the current date has been fully ingested for the target market; (b) corporate action adjustments have been applied; (c) no price anomalies detected (e.g., split not yet reflected). If validation fails, abort and alert engineering team. Do not run partial screening — partial results are worse than no results.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--blue-dim);color:var(--blue)">2</div>
+      <div class="flow-step-body">
+        <h4>Universe Fetch</h4>
+        <p>Load all active securities for the target market from <code>securities</code> table where <code>is_active = true</code> and <code>security_type = 'EQUITY'</code>. Apply minimum price and volume pre-filters against today's <code>daily_prices</code> to eliminate penny stocks and illiquid names before expensive computation. This reduces the working set by ~40–60%.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--orange-dim);color:var(--orange)">3</div>
+      <div class="flow-step-body">
+        <h4>Indicator Computation (Parallelised)</h4>
+        <p>For each security in the filtered universe, compute and upsert into <code>computed_indicators</code>: SMA-50, SMA-150, SMA-200, SMA-200 lags (21d, 63d), 52-week high/low, average volume 50d, RS score, RS rank (requires all scores computed first for percentile ranking — this is a two-pass step), up/down volume day counts. Use numpy vectorised operations. Run in parallel batches of 500 securities per Celery worker. RS ranking requires a second pass after all raw RS scores are computed to derive percentile ranks.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--purple-dim);color:var(--purple)">4</div>
+      <div class="flow-step-body">
+        <h4>Layer 1: Technical Qualification (Trend Template)</h4>
+        <p>Evaluate TT-01 through TT-08 against computed indicators. Any single failure short-circuits evaluation for that security and logs the failing rule IDs to <code>screening_results.fail_reasons</code>. A stock passing all 8 Trend Template criteria advances to Layer 2. Record <code>tech_score</code> (0–8).</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--teal-dim);color:var(--teal)">5</div>
+      <div class="flow-step-body">
+        <h4>Layer 2: Fundamental Qualification</h4>
+        <p>For stocks that passed Layer 1, fetch the 6 most recent quarterly fundamental records from <code>fundamentals_quarterly</code>. Evaluate EPS-01 through EPS-06, SLS-01 through SLS-03, MGN-01 through MGN-03, LQD-03, LQD-04. Apply disqualification rules DQ-04 and DQ-05. Record <code>fund_score</code> (0–10). A stock must pass all mandatory fundamental criteria to receive <code>qualifies = true</code>.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--green-dim);color:var(--green)">6</div>
+      <div class="flow-step-body">
+        <h4>Confidence Score Computation</h4>
+        <p>For stocks with <code>qualifies = true</code>, compute an optional criteria confidence score (0–100). Each optional criterion contributes a weighted point value: EPS surprise (8pts), estimate revisions upward (6pts), RS &gt; 80 (+5pts), RS &gt; 90 (+5pts more), code-33 pattern (10pts), ROE ≥ 17% (7pts), VCP signals (up to 15pts combined), volume confirmation (8pts), sector leadership (6pts), market correction resilience (5pts), leading sector (5pts). Weights are configurable in system settings.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--orange-dim);color:var(--orange)">7</div>
+      <div class="flow-step-body">
+        <h4>Change Detection (New Qualifiers / Disqualifications)</h4>
+        <p>Compare today's qualification results against yesterday's results for the same market. Set <code>is_new_qualifier = true</code> where <code>qualifies = true</code> AND yesterday's record shows <code>qualifies = false</code> (or no record exists). Set <code>is_disqualified = true</code> where today <code>qualifies = false</code> AND yesterday <code>qualifies = true</code>. These flags drive the alert engine.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--blue-dim);color:var(--blue)">8</div>
+      <div class="flow-step-body">
+        <h4>Result Persistence & Breadth Update</h4>
+        <p>Bulk upsert all results into <code>screening_results</code> using PostgreSQL <code>INSERT ... ON CONFLICT DO UPDATE</code>. Update <code>market_breadth_daily</code> with aggregate counts. Invalidate Redis cache for dashboard queries. Total runtime target: &lt; 10 minutes for 6,000+ stocks.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--purple-dim);color:var(--purple)">9</div>
+      <div class="flow-step-body">
+        <h4>Alert Queue Population</h4>
+        <p>Push alert events to Redis queue for the notification service. Events: <code>NEW_QUALIFIER</code>, <code>DISQUALIFIED</code>, <code>WATCHLIST_QUALIFIED</code>. The notification service drains this queue asynchronously, preventing alert sending from blocking the screening pipeline.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--green-dim);color:var(--green)">10</div>
+      <div class="flow-step-body">
+        <h4>Performance Tracking Update (Async, Next Day)</h4>
+        <p>A separate daily job runs at market open +1 hour. It looks up all qualification events from 5, 20, and 60 trading days ago and computes returns vs. the price on the qualification date. Updates <code>qualification_performance</code>. This job is non-blocking and runs independently of the main screening pipeline.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-label">Core Screening Engine — Python Pseudocode (Layer 1)</div>
+    <div class="code-block"><code><span class="ck">def</span> <span class="cc">evaluate_trend_template</span>(ind: ComputedIndicators, price: float) -> <span class="cc">TechResult</span>:
+    results = {}
+    results[<span class="cs">'TT01'</span>] = price > ind.sma_150 <span class="ck">and</span> price > ind.sma_200
+    results[<span class="cs">'TT02'</span>] = ind.sma_150 > ind.sma_200
+    results[<span class="cs">'TT03'</span>] = ind.sma_200 > ind.sma_200_21d_ago  <span class="cm"># 1 month minimum</span>
+    results[<span class="cs">'TT04'</span>] = ind.sma_50 > ind.sma_150 <span class="ck">and</span> ind.sma_50 > ind.sma_200
+    results[<span class="cs">'TT05'</span>] = price > ind.sma_50
+    results[<span class="cs">'TT06'</span>] = price >= ind.low_52w * <span class="cn">1.30</span>
+    results[<span class="cs">'TT07'</span>] = price >= ind.high_52w * <span class="cn">0.75</span>
+    results[<span class="cs">'TT08'</span>] = ind.rs_rank >= <span class="cn">70</span> <span class="ck">and</span> ind.rs_rank > ind.rs_rank_63d_ago
+
+    passed_all  = <span class="ck">all</span>(results.values())
+    tech_score  = <span class="ck">sum</span>(results.values())
+    fail_codes  = [k <span class="ck">for</span> k, v <span class="ck">in</span> results.items() <span class="ck">if not</span> v]
+
+    <span class="ck">return</span> TechResult(qualifies=passed_all, score=tech_score, fails=fail_codes, detail=results)
+
+<span class="ck">def</span> <span class="cc">evaluate_fundamentals</span>(fund: list[QuarterlyFundamentals], settings: UserSettings):
+    <span class="cm"># Get configurable thresholds (Pro users can override)</span>
+    eps_threshold = settings.get(<span class="cs">'eps_qoq_min'</span>, default=<span class="cn">25.0</span>)
+    rev_threshold = settings.get(<span class="cs">'rev_qoq_min'</span>, default=<span class="cn">20.0</span>)
+
+    latest = fund[<span class="cn">0</span>]
+    prev_4 = fund[<span class="cn">1</span>:<span class="cn">5</span>]
+
+    results = {}
+    results[<span class="cs">'EPS01'</span>] = latest.eps_yoy_growth >= eps_threshold
+    results[<span class="cs">'EPS02'</span>] = detect_eps_acceleration(fund)   <span class="cm"># ≥2 of last 3 Q accel</span>
+    results[<span class="cs">'EPS03'</span>] = compute_annual_eps_growth(fund) >= eps_threshold
+    results[<span class="cs">'SLS01'</span>] = latest.revenue_yoy_growth >= rev_threshold
+    results[<span class="cs">'MGN01'</span>] = compute_margin_slope(fund) >= <span class="cn">0</span>       <span class="cm"># non-negative 4Q slope</span>
+    <span class="cm"># Disqualifiers</span>
+    results[<span class="cs">'DQ04'</span>] = <span class="ck">not</span> detect_eps_deceleration_3q(fund)   <span class="cm"># True = OK (no decel)</span>
+    results[<span class="cs">'DQ05'</span>] = latest.revenue_yoy_growth >= <span class="cn">0</span>          <span class="cm"># True = OK (not negative)</span>
+
+    passed = <span class="ck">all</span>(results.values())
+    <span class="ck">return</span> FundResult(qualifies=passed, score=<span class="ck">sum</span>(results.values()), detail=results)</code></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ DASHBOARD ═══════════════════════════ -->
+<section id="dashboard">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--teal-dim)">🖥️</div>
+    <div class="section-head-text">
+      <h2>Deliverable 6 — Dashboard Architecture</h2>
+      <p>Frontend component design and API endpoint mapping</p>
+    </div>
+  </div>
+
+  <h3>Frontend Stack</h3>
+  <p>React 18 + TypeScript + TailwindCSS. Chart library: Recharts (lightweight) or TradingView
+  lightweight-charts for price charts. State management: Zustand. Data fetching: React Query with
+  automatic background refresh every 15 minutes during market hours.</p>
+
+  <h3>Dashboard Pages & Components</h3>
+
+  <table class="rule-table">
+    <thead><tr><th>Page / Component</th><th>Access</th><th>Data Source (API endpoint)</th><th>Refresh</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Today's Qualifiers</strong><br><small>Sortable table with ticker, price, confidence score, market, sector</small></td>
+        <td><span class="badge badge-mandatory">Both</span></td>
+        <td><code>GET /api/v1/screen/today?market=US&qualifies=true</code></td>
+        <td>Daily (post-market)</td>
+      </tr>
+      <tr>
+        <td><strong>New Qualifiers</strong><br><small>Stocks newly qualifying today (not qualified yesterday)</small></td>
+        <td><span class="badge badge-mandatory">Both</span></td>
+        <td><code>GET /api/v1/screen/today?is_new_qualifier=true</code></td>
+        <td>Daily</td>
+      </tr>
+      <tr>
+        <td><strong>Disqualified Today</strong><br><small>Stocks that dropped off the list today with reason codes</small></td>
+        <td><span class="badge badge-mandatory">Both</span></td>
+        <td><code>GET /api/v1/screen/today?is_disqualified=true</code></td>
+        <td>Daily</td>
+      </tr>
+      <tr>
+        <td><strong>Market Breadth Panel</strong><br><small>Total qualifiers count, trend vs. prior 30 days (is the market healthy?)</small></td>
+        <td><span class="badge badge-mandatory">Both</span></td>
+        <td><code>GET /api/v1/breadth?market=US&days=30</code></td>
+        <td>Daily</td>
+      </tr>
+      <tr>
+        <td><strong>Historical Breadth Chart</strong><br><small>Line chart: # qualifiers over trailing 12 months</small></td>
+        <td><span class="badge badge-pro">PRO</span></td>
+        <td><code>GET /api/v1/breadth?market=US&days=365</code></td>
+        <td>Daily</td>
+      </tr>
+      <tr>
+        <td><strong>Performance Statistics</strong><br><small>Median 1W/4W/12W returns, failure rate, max drawdown distribution — aggregate only, no individual stock predictions</small></td>
+        <td><span class="badge badge-pro">PRO</span></td>
+        <td><code>GET /api/v1/performance/stats?market=US&period=12m</code></td>
+        <td>Daily</td>
+      </tr>
+      <tr>
+        <td><strong>Watchlist Tracker</strong><br><small>User's saved stocks with current qualification status</small></td>
+        <td><span class="badge badge-pro">PRO</span></td>
+        <td><code>GET /api/v1/watchlist/{id}/status</code></td>
+        <td>Daily</td>
+      </tr>
+      <tr>
+        <td><strong>Filter Customiser</strong><br><small>Sliders for EPS threshold, revenue threshold, RS rank minimum, etc.</small></td>
+        <td><span class="badge badge-pro">PRO</span></td>
+        <td><code>PUT /api/v1/user/settings/thresholds</code></td>
+        <td>On save</td>
+      </tr>
+      <tr>
+        <td><strong>Market Selector</strong><br><small>Switch between US, NSE, BSE, or "All Markets"</small></td>
+        <td><span class="badge badge-mandatory">Basic: 1 market. Pro: All</span></td>
+        <td>Client-side filter on fetched data</td>
+        <td>Instant</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout good">
+    <span class="callout-icon">✅</span>
+    <div><strong>Performance Tracking Display Rules:</strong> The Performance Statistics panel must
+    display only aggregate statistics (median, mean, standard deviation, percentiles). It must never
+    display individual stock returns alongside the stock name in a way that constitutes a
+    performance recommendation. Include a prominent disclaimer on this page.</div>
+  </div>
+
+  <h3>Key API Endpoints</h3>
+  <div class="code-wrap">
+    <div class="code-label">FastAPI route definitions</div>
+    <div class="code-block"><code><span class="cm"># Screening</span>
+GET  /api/v1/screen/today           <span class="cm"># Today's results, filterable by market, qualifies, new, disq</span>
+GET  /api/v1/screen/history         <span class="cm"># Historical screening for a specific security</span>
+GET  /api/v1/screen/{security_id}   <span class="cm"># Detailed breakdown for one stock</span>
+
+<span class="cm"># Breadth</span>
+GET  /api/v1/breadth                <span class="cm"># Daily qualifier counts, paginated by date range</span>
+
+<span class="cm"># Performance (Pro only)</span>
+GET  /api/v1/performance/stats      <span class="cm"># Aggregate return statistics</span>
+GET  /api/v1/performance/cohorts    <span class="cm"># Stats grouped by confidence score quartile</span>
+
+<span class="cm"># Watchlist (Pro only)</span>
+GET  /api/v1/watchlists             <span class="cm"># User's watchlists</span>
+POST /api/v1/watchlists             <span class="cm"># Create watchlist</span>
+POST /api/v1/watchlists/{id}/items  <span class="cm"># Add security to watchlist</span>
+GET  /api/v1/watchlists/{id}/status <span class="cm"># Current qualification status of all items</span>
+
+<span class="cm"># User settings (Pro only)</span>
+GET  /api/v1/user/settings          <span class="cm"># Current thresholds</span>
+PUT  /api/v1/user/settings          <span class="cm"># Update thresholds</span>
+
+<span class="cm"># Securities lookup</span>
+GET  /api/v1/securities/search      <span class="cm"># Search by ticker or name</span>
+GET  /api/v1/securities/{id}        <span class="cm"># Security details</span></code></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ALERTS ═══════════════════════════ -->
+<section id="alerts">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--orange-dim)">🔔</div>
+    <div class="section-head-text">
+      <h2>Deliverable 7 — Alert Engine Design</h2>
+      <p>Event types, delivery channels, and subscription management</p>
+    </div>
+  </div>
+
+  <h3>Alert Event Types</h3>
+  <table class="rule-table">
+    <thead><tr><th>Event Type</th><th>Trigger Condition</th><th>Access</th><th>Channels Available</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>NEW_QUALIFIER</code></td>
+        <td><code>is_new_qualifier = true</code> on today's screening run</td>
+        <td>Both tiers</td>
+        <td>Email (both), Push notification (both), Telegram bot (both), Webhook (Pro)</td>
+      </tr>
+      <tr>
+        <td><code>DISQUALIFIED</code></td>
+        <td><code>is_disqualified = true</code> on today's screening run</td>
+        <td>Pro only</td>
+        <td>Email, Push, Telegram, Webhook</td>
+      </tr>
+      <tr>
+        <td><code>WATCHLIST_QUALIFIED</code></td>
+        <td>Any security in user's watchlist transitions to <code>qualifies = true</code></td>
+        <td>Pro only</td>
+        <td>Email, Push, Telegram, Webhook (high priority — send immediately when screening completes)</td>
+      </tr>
+      <tr>
+        <td><code>DAILY_DIGEST</code></td>
+        <td>Daily scheduled send (user-configurable time)</td>
+        <td>Both tiers</td>
+        <td>Email only</td>
+      </tr>
+      <tr>
+        <td><code>BREADTH_THRESHOLD</code></td>
+        <td>Total qualifier count crosses user-set threshold (e.g., drops below 50 — market weakness signal)</td>
+        <td>Pro only</td>
+        <td>Email, Push, Telegram</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Alert Engine Flow</h3>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--orange-dim);color:var(--orange)">1</div>
+      <div class="flow-step-body">
+        <h4>Event Generation</h4>
+        <p>After screening run completes (Step 9 in engine flow), a dedicated <code>AlertEventGenerator</code> process queries <code>screening_results</code> for all new qualifiers and disqualifications. Cross-references against <code>watchlist_items</code> to generate watchlist-specific events. Pushes event objects to Redis sorted set keyed by priority.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--orange-dim);color:var(--orange)">2</div>
+      <div class="flow-step-body">
+        <h4>User Subscription Resolution</h4>
+        <p>For each event, resolve which users should receive it: query <code>users</code> joined to <code>subscriptions</code> to check tier. Check user's alert preferences (channels enabled, quiet hours, market filters). Build recipient list. For watchlist alerts: only notify users whose watchlist contains that specific security.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--orange-dim);color:var(--orange)">3</div>
+      <div class="flow-step-body">
+        <h4>Message Rendering</h4>
+        <p>Render alert content using templates per channel type. Email: HTML template with logo, list of new qualifiers sorted by confidence score, sector breakdown, disclaimer. Push: Short title + ticker + market. Telegram: Markdown-formatted message (existing format from current screener, extended). Output constraint applies: no price targets, no buy signals.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--orange-dim);color:var(--orange)">4</div>
+      <div class="flow-step-body">
+        <h4>Delivery & Logging</h4>
+        <p>Send via appropriate channel client (SES/FCM/Telegram Bot API/Webhook). On success: log to <code>alert_log</code> with <code>status = 'sent'</code>. On failure: retry up to 3 times with exponential backoff (1m, 5m, 15m). If all retries fail: log <code>status = 'failed'</code> and alert engineering via separate monitoring channel.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>Alert Batching for Basic Users:</strong> Basic tier users receive alerts as a
+    single daily digest rather than real-time per-event notifications. This prevents alert fatigue
+    on days with many new qualifiers, reduces email sending costs, and differentiates Pro value.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ RBAC ═══════════════════════════ -->
+<section id="rbac">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--purple-dim)">🔐</div>
+    <div class="section-head-text">
+      <h2>Deliverable 8 — Role-Based Access Logic</h2>
+      <p>Tier definitions, middleware enforcement, and feature flags</p>
+    </div>
+  </div>
+
+  <div class="tier-grid">
+    <div class="tier-card tier-basic">
+      <div class="tier-name">Basic</div>
+      <div class="tier-price">Suggested: $19/mo — Single market</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>One market of choice (US or India)</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Daily qualifier list (today's results)</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>New qualifiers list</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Daily email digest</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Telegram / Push alerts (new qualifiers)</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Market breadth count (today only)</div>
+      <div class="tier-feature"><span class="tier-x">✗</span>Dashboard (email list only)</div>
+      <div class="tier-feature"><span class="tier-x">✗</span>Historical breadth chart</div>
+      <div class="tier-feature"><span class="tier-x">✗</span>Performance statistics</div>
+      <div class="tier-feature"><span class="tier-x">✗</span>Watchlist</div>
+      <div class="tier-feature"><span class="tier-x">✗</span>Disqualification alerts</div>
+      <div class="tier-feature"><span class="tier-x">✗</span>Custom filter thresholds</div>
+      <div class="tier-feature"><span class="tier-x">✗</span>Multi-market access</div>
+      <div class="tier-feature"><span class="tier-x">✗</span>API access / webhooks</div>
+    </div>
+    <div class="tier-card tier-pro">
+      <div class="tier-name" style="color:var(--green)">Pro</div>
+      <div class="tier-price">Suggested: $49/mo — All markets</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>All Basic features</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>US + NSE + BSE (all markets)</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Full web dashboard</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Historical breadth chart (12 months)</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Performance statistics (aggregate)</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Watchlist (up to 50 stocks)</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Watchlist qualification alerts</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Disqualification alerts</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Adjustable filter thresholds</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Real-time alerts (post-screening)</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>Webhook delivery</div>
+      <div class="tier-feature"><span class="tier-check">✓</span>CSV export of daily results</div>
+    </div>
+  </div>
+
+  <h3>Middleware Enforcement (FastAPI)</h3>
+  <div class="code-wrap">
+    <div class="code-label">FastAPI dependency for tier-based access control</div>
+    <div class="code-block"><code><span class="ck">from</span> fastapi <span class="ck">import</span> Depends, HTTPException
+
+<span class="ck">async def</span> <span class="cc">require_pro</span>(current_user: User = Depends(get_current_user)):
+    <span class="ck">if</span> current_user.subscription_tier != <span class="cs">'pro'</span>:
+        <span class="ck">raise</span> HTTPException(
+            status_code=<span class="cn">403</span>,
+            detail={<span class="cs">"error"</span>: <span class="cs">"pro_required"</span>, <span class="cs">"message"</span>: <span class="cs">"Upgrade to Pro to access this feature"</span>}
+        )
+    <span class="ck">return</span> current_user
+
+<span class="cm"># Market access enforcement</span>
+<span class="ck">async def</span> <span class="cc">check_market_access</span>(market: str, user: User = Depends(get_current_user)):
+    <span class="ck">if</span> user.subscription_tier == <span class="cs">'basic'</span>:
+        allowed_market = user.settings.get(<span class="cs">'selected_market'</span>)
+        <span class="ck">if</span> market != allowed_market:
+            <span class="ck">raise</span> HTTPException(<span class="cn">403</span>, detail=<span class="cs">"Upgrade to Pro for multi-market access"</span>)
+
+<span class="cm"># Route usage examples</span>
+@app.get(<span class="cs">"/api/v1/performance/stats"</span>)
+<span class="ck">async def</span> get_performance(user: User = Depends(require_pro)):
+    ...
+
+@app.get(<span class="cs">"/api/v1/screen/today"</span>)
+<span class="ck">async def</span> get_today(market: str, user: User = Depends(check_market_access)):
+    ...</code></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ SCALABILITY ═══════════════════════════ -->
+<section id="scalability">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--red-dim)">📈</div>
+    <div class="section-head-text">
+      <h2>Deliverable 9 — Scalability Risks</h2>
+      <p>Identified bottlenecks and mitigation strategies</p>
+    </div>
+  </div>
+
+  <table class="rule-table">
+    <thead>
+      <tr><th>Risk</th><th>Impact</th><th>Likelihood</th><th>Mitigation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>RS Rank Two-Pass Bottleneck</strong><br><small>Computing percentile ranks requires all raw RS scores first — sequential dependency prevents full parallelisation</small></td>
+        <td><span class="impact-med">MEDIUM</span></td>
+        <td><span class="impact-high">HIGH</span></td>
+        <td>Pre-compute raw RS scores in parallel pass 1, aggregate all scores in Redis, compute percentiles in vectorised numpy pass 2 (ms-level operation), then write results. Adds &lt; 30 seconds to pipeline.</td>
+      </tr>
+      <tr>
+        <td><strong>Database Write Contention at Pipeline End</strong><br><small>Bulk upsert of 6,000+ rows into hypertable while dashboard users are reading</small></td>
+        <td><span class="impact-high">HIGH</span></td>
+        <td><span class="impact-med">MEDIUM</span></td>
+        <td>Use staging table: write results to <code>screening_results_staging</code>, then atomic RENAME or partition swap. Dashboard reads from prior day until swap completes. Zero-downtime cutover.</td>
+      </tr>
+      <tr>
+        <td><strong>External API Rate Limits</strong><br><small>EODHD and Intrinio have rate limits that could throttle data ingestion</small></td>
+        <td><span class="impact-high">HIGH</span></td>
+        <td><span class="impact-high">HIGH</span></td>
+        <td>Implement exponential backoff with jitter. Cache all fetched data — never re-fetch for same date. Distribute calls across time window. Have secondary data source fallback configured. Monitor API quota usage via Prometheus.</td>
+      </tr>
+      <tr>
+        <td><strong>Fundamental Data Latency (India)</strong><br><small>Indian company results often published late and inconsistently by data providers</small></td>
+        <td><span class="impact-med">MEDIUM</span></td>
+        <td><span class="impact-high">HIGH</span></td>
+        <td>Cache last-known fundamentals. Flag stocks as "fundamentals pending" if reporting is overdue. Do not downgrade qualification status based on missing data — only change when data is received. Show data age to Pro users.</td>
+      </tr>
+      <tr>
+        <td><strong>Alert Volume Spike on High-Activity Days</strong><br><small>Bull market breakout days could trigger 200+ new qualifiers — alert volume overwhelms email provider</small></td>
+        <td><span class="impact-med">MEDIUM</span></td>
+        <td><span class="impact-med">MEDIUM</span></td>
+        <td>Batch alerts per user (not per stock). Implement per-user daily alert cap (e.g., 1 email per user per run, regardless of new qualifier count). Use digest format rather than individual alerts per stock.</td>
+      </tr>
+      <tr>
+        <td><strong>TimescaleDB Chunk Accumulation</strong><br><small>daily_prices and screening_results grow indefinitely</small></td>
+        <td><span class="impact-low">LOW</span></td>
+        <td><span class="impact-high">HIGH</span> (certain)</td>
+        <td>Configure TimescaleDB compression policies (compress chunks older than 90 days). Implement data retention policies: raw prices: keep all; screening_results: keep 2 years active, archive older; performance_tracking: keep forever (small table).</td>
+      </tr>
+      <tr>
+        <td><strong>Multi-Market Timezone Complexity</strong><br><small>US (4:30 PM ET) and India (3:45 PM IST) pipelines overlap in UTC — risk of one pipeline affecting the other's resources</small></td>
+        <td><span class="impact-med">MEDIUM</span></td>
+        <td><span class="impact-med">MEDIUM</span></td>
+        <td>Run US and India screening as completely isolated Celery task queues with separate worker pools. Configure resource limits per queue. India closes at ~10:15 AM UTC, US pipeline starts at ~21:30 UTC — no actual time overlap.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════ DATA INTEGRITY ═══════════════════════════ -->
+<section id="integrity">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--orange-dim)">🔍</div>
+    <div class="section-head-text">
+      <h2>Deliverable 10 — Data Integrity Risks</h2>
+      <p>Data quality failures and how to detect and prevent them</p>
+    </div>
+  </div>
+
+  <table class="rule-table">
+    <thead>
+      <tr><th>Risk</th><th>Consequence if Undetected</th><th>Detection Method</th><th>Remediation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Unadjusted Split / Bonus Share Prices</strong><br><small>Stock appears to have crashed 50% overnight — it just split</small></td>
+        <td>Stock incorrectly disqualified (fails TT-01 to TT-07); false disqualification alert sent to users</td>
+        <td>Compare raw close with prior day raw close. If change &gt; 40% in either direction, cross-check against corporate action calendar before processing. Flag for manual review.</td>
+        <td>Apply corporate action adjustment retroactively. Re-run screening for that security. Send corrected results to affected users.</td>
+      </tr>
+      <tr>
+        <td><strong>Stale Fundamental Data</strong><br><small>EPS data from 2 quarters ago used as "latest" due to provider delay</small></td>
+        <td>Stock qualifies on outdated (potentially deteriorating) fundamentals; false positive qualification</td>
+        <td>Check <code>fundamentals_quarterly.period_end</code> date. If latest record is &gt; 120 days old, flag stock as "STALE_FUNDAMENTALS". Do not disqualify, but mark in results and alert Pro users.</td>
+        <td>Implement fallback fundamentals provider. Show data staleness indicator in dashboard. Do not suppress qualification — inform users of data age.</td>
+      </tr>
+      <tr>
+        <td><strong>Survivorship Bias in Performance Stats</strong><br><small>Delisted stocks excluded from historical return calculations, inflating apparent success rates</small></td>
+        <td>Performance statistics appear better than reality; misleads Pro users evaluating methodology quality</td>
+        <td>Maintain <code>securities.is_active</code> = false for delisted stocks but retain all historical data. Include delisted stocks in performance calculations using their final available price as the return endpoint (often near zero for bankruptcies).</td>
+        <td>Retroactively include delisted stocks in performance cohort. Add disclosure to statistics panel explaining survivorship bias treatment.</td>
+      </tr>
+      <tr>
+        <td><strong>Lookahead Bias in Historical Screening</strong><br><small>When displaying "how this stock looked on date X", accidental use of data that wasn't available on date X</small></td>
+        <td>Historical performance looks unrealistically good; fundamentals data from future quarters used in past screening dates</td>
+        <td>All historical queries must be point-in-time: use <code>report_date &lt;= target_date</code> (not <code>period_end</code>) for fundamental lookups. Enforce strict time filtering in all historical APIs.</td>
+        <td>Add <code>report_date</code> to all historical screening logic. Add integration tests that verify point-in-time correctness using known historical cases.</td>
+      </tr>
+      <tr>
+        <td><strong>Provider Outage / Missing Trading Day</strong><br><small>Data provider fails to deliver prices for one trading day — previous day's data reused accidentally</small></td>
+        <td>Screening runs on stale prices; indicators computed incorrectly; could persist for days if not caught</td>
+        <td>Before every screening run: verify that the count of securities with prices for today's date equals at least 90% of yesterday's count. Verify latest price_date for each market equals today's expected trading date.</td>
+        <td>Abort screening if validation fails. Use secondary data provider as fallback. Alert engineering team immediately.</td>
+      </tr>
+      <tr>
+        <td><strong>Currency / Unit Inconsistency (India)</strong><br><small>BSE prices in rupees, NSE in rupees — but some data providers mix crore/lakh units for market cap</small></td>
+        <td>Market cap filter produces wrong results; stocks filtered incorrectly based on unit confusion</td>
+        <td>Normalise all currency/unit fields on ingestion. Store market cap in consistent units (full rupees or USD equivalent). Validate by checking that market cap = price × shares outstanding within ±5% tolerance.</td>
+        <td>Ingestion pipeline must enforce unit standards. Reject records failing validation with unit errors logged for provider follow-up.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════ COMPLIANCE ═══════════════════════════ -->
+<section id="compliance">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--red-dim)">⚖️</div>
+    <div class="section-head-text">
+      <h2>Deliverable 11 — Compliance Risk Considerations</h2>
+      <p>Regulatory framework awareness for US, India, and global operations</p>
+    </div>
+  </div>
+
+  <div class="callout risk">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>Important Disclaimer:</strong> This section identifies compliance considerations that require review by qualified legal and regulatory counsel in each jurisdiction. This is not legal advice. Requirements vary by jurisdiction and are subject to change. Engage local counsel before launch in each market.</div>
+  </div>
+
+  <h3>United States</h3>
+  <table class="rule-table">
+    <thead><tr><th>Area</th><th>Risk</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Investment Adviser Registration (SEC)</strong></td>
+        <td>Providing "investment advice" for compensation requires registration as an Investment Adviser under the Investment Advisers Act of 1940. Screening tools can be exempt, but the line is nuanced.</td>
+        <td>The system output is strictly <em>"Currently meets SEPA-based qualification criteria."</em> Do NOT provide entry prices, stop losses, targets, position sizing, or portfolio recommendations. Engage securities counsel to confirm exemption applies.</td>
+      </tr>
+      <tr>
+        <td><strong>FINRA Broker-Dealer Rules</strong></td>
+        <td>Referring to specific securities in a context that resembles a research report or recommendation could trigger broker-dealer regulations.</td>
+        <td>Add prominent disclaimers on every page: "This is a screening tool, not investment advice. Past qualification does not predict future returns. Consult a registered investment advisor before making investment decisions."</td>
+      </tr>
+      <tr>
+        <td><strong>Data Redistribution Rights</strong></td>
+        <td>Redistributing real-time or delayed market data to subscribers may require exchange licenses (NYSE, NASDAQ).</td>
+        <td>Check data provider agreements (EODHD, Polygon, etc.) for redistribution rights. End-of-day delayed data (15-20 min delay) typically has lighter licensing requirements than real-time. Disclose data timing to users.</td>
+      </tr>
+      <tr>
+        <td><strong>Privacy (CCPA / US State Laws)</strong></td>
+        <td>Collecting and storing user financial preferences and behavior.</td>
+        <td>Publish privacy policy. Offer data deletion. Implement data minimisation. Encrypt PII at rest. Consult CCPA/state privacy law counsel.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>India</h3>
+  <table class="rule-table">
+    <thead><tr><th>Area</th><th>Risk</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>SEBI Investment Adviser Regulations 2013</strong></td>
+        <td>Providing investment advice on specific securities to clients in India requires SEBI IA registration. Screening tools that identify specific stocks and present them to investors can be considered advice.</td>
+        <td>Critical: This is a high-risk area. The output restriction ("meets criteria") is important but may be insufficient. Consult a SEBI-qualified counsel before launching to Indian subscribers. Consider registration or restructuring the service to provide educational/research content rather than individual stock screening.</td>
+      </tr>
+      <tr>
+        <td><strong>SEBI Research Analyst Regulations 2014</strong></td>
+        <td>Publishing research reports or recommendations on securities requires SEBI Research Analyst registration.</td>
+        <td>If the platform includes any written analysis beyond the qualification output, ensure this is clearly educational. Engage SEBI-qualified counsel to review all content.</td>
+      </tr>
+      <tr>
+        <td><strong>Digital Personal Data Protection Act 2023 (DPDPA)</strong></td>
+        <td>India's new data protection law requires consent-based data processing, data localisation considerations, and breach notification.</td>
+        <td>Implement consent management. Consider India data residency requirements (store Indian user data on India-based servers). Implement breach notification procedures. Engage local data protection counsel.</td>
+      </tr>
+      <tr>
+        <td><strong>NSE/BSE Data Licensing</strong></td>
+        <td>Using NSE/BSE data commercially may require formal licensing agreements with the exchanges.</td>
+        <td>Engage NSE and BSE data licensing departments. Review terms of all Indian data provider agreements for commercial use rights. Budget for exchange licensing fees.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Global / SaaS Platform</h3>
+  <table class="rule-table">
+    <thead><tr><th>Area</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>GDPR (EU users)</strong></td>
+        <td>If any EU users subscribe: lawful basis for processing, right to erasure, DPA agreements with processors, Privacy Shield successor compliance. Consider geo-blocking EU if not ready to comply.</td>
+      </tr>
+      <tr>
+        <td><strong>Intellectual Property (Methodology)</strong></td>
+        <td>The SEPA methodology is associated with the Minervini brand. Do not use "SEPA," "Minervini," or "Specific Entry Point Analysis" as brand names without licence. Describe the methodology in your own words as "criteria inspired by published growth investing principles." Avoid trademark infringement in marketing.</td>
+      </tr>
+      <tr>
+        <td><strong>Payment Processing</strong></td>
+        <td>Stripe handles PCI-DSS compliance for card data. Never store raw card data. Validate Stripe webhook signatures. Implement proper subscription lifecycle management (upgrades, downgrades, cancellations, failed payment handling).</td>
+      </tr>
+      <tr>
+        <td><strong>Terms of Service</strong></td>
+        <td>Draft clear ToS that: (1) prohibits redistribution of screening results; (2) states screening results are not investment advice; (3) limits liability for investment decisions based on the tool; (4) defines acceptable use of API access (Pro tier); (5) includes jurisdiction-specific addenda for US and India.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout risk">
+    <span class="callout-icon">🚨</span>
+    <div><strong>Single Highest-Priority Compliance Action:</strong> Before accepting any paying subscribers in India, obtain a written legal opinion from a SEBI-qualified lawyer on whether the platform's output format requires SEBI Investment Adviser or Research Analyst registration. This is non-negotiable. Launch US-only first while India compliance is resolved.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3>Summary: Implementation Priority Order</h3>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--green-dim);color:var(--green)">P1</div>
+      <div class="flow-step-body"><h4>Week 1–4: Foundation</h4><p>Database schema, data ingestion pipeline (EODHD), US price + indicator computation, basic Trend Template screening, email alerts. <strong>Replaces existing system.</strong></p></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--blue-dim);color:var(--blue)">P2</div>
+      <div class="flow-step-body"><h4>Week 5–8: Fundamentals + Auth</h4><p>Fundamental data ingestion (Intrinio), Layer 2 qualification, user authentication, tier enforcement, Stripe billing, basic dashboard (React).</p></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--orange-dim);color:var(--orange)">P3</div>
+      <div class="flow-step-body"><h4>Week 9–12: India + Alerts</h4><p>India market integration (NSE/BSE), corporate action normalisation, full alert engine, watchlist feature, historical breadth charts.</p></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num" style="background:var(--purple-dim);color:var(--purple)">P4</div>
+      <div class="flow-step-body"><h4>Week 13–16: Performance + Scale</h4><p>Historical performance tracking, Pro threshold customisation, VCP detection, webhook delivery, performance optimisation, load testing.</p></div>
+    </div>
+  </div>
+
+  <p style="margin-top:20px;font-size:12px;color:var(--text3);text-align:center;border-top:1px solid var(--border);padding-top:16px">
+    This document is a technical specification only. It does not constitute investment advice, legal advice, or regulatory guidance.
+    All screening output from the platform must comply with the output restriction stated in the Introduction section.
+    Consult qualified legal, regulatory, and financial professionals before launch.
+  </p>
+
+</section>
+
+</main>
+</div>
+
+<script>
+// Sidebar active link highlight on scroll
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('nav a[href^="#"]');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
