@@ -63,7 +63,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // handle pre-flight for all routes
+app.options(/.*/, cors(corsOptions)); // handle pre-flight for all routes
 
 
 // ── Body parsing — size-limited ──────────────────────────────────
